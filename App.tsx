@@ -187,7 +187,7 @@ const App: React.FC = () => {
                         </h1>
 
                         <p className="text-lg sm:text-2xl dark:text-slate-300 text-slate-700 max-w-3xl mx-auto font-light leading-relaxed mb-10">
-                            Uma experiência de transformação social: promovendo a <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Cultura de Paz</span> e <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Direitos Humanos</span> nas escolas (2023-2025).
+                            Uma experiência de transformação social: promovendo a <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Cultura de Paz</span> e <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Direitos Humanos</span> nas escolas (2023-2026).
                         </p>
                         
                         <div className="flex justify-center gap-4">
