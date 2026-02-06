@@ -1,3 +1,4 @@
+
 import { ChartConfig, TimelineEvent, DocumentItem } from './types';
 
 // Cores baseadas no design original (Tons de Vermelho/Laranja/Amarelo sobre fundo escuro)
@@ -283,7 +284,10 @@ export const documents: DocumentItem[] = [
     { title: 'Projeto Embaixador da Paz', url: 'https://drive.google.com/file/d/1WuvM9Ycg1fc2IctijY4-NNnuQS4YU_xc/view?usp=drive_link' },
     { title: 'Projeto Saúde Mental', url: 'https://drive.google.com/file/d/1-ButtstXEFyEnWfRiM1hz-8IFYEROU8B/view?usp=drive_link' },
     { title: 'Protocolo de Mediação', url: 'https://drive.google.com/file/d/1lOhunV8iSgmwHOVixOjvCZ3yG4I8Yr21/view?usp=drive_link' },
-    { title: 'Relatório Retrospectiva', url: 'https://drive.google.com/file/d/1PgGA6umiy4I5OZJkCn7IVb2g09Mne1fx/view?usp=drive_link' }
+    { title: 'Relatório Retrospectiva', url: 'https://drive.google.com/file/d/1PgGA6umiy4I5OZJkCn7IVb2g09Mne1fx/view?usp=drive_link' },
+    { title: 'PROMAPE', url: '#' },
+    { title: 'Implantação de rede família-escola', url: '#' },
+    { title: 'Mediação de conflitos e práticas restaurativas', url: '#' }
 ];
 
 export const galleryImages = [
