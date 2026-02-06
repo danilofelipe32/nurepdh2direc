@@ -67,27 +67,27 @@ const App: React.FC = () => {
         {
             url: "https://drive.google.com/file/d/1r-v9MShjYoGLVXi90s2AvkPyaQ8yFaRO/preview",
             thumb: "https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=1000&auto=format&fit=crop",
-            title: "Ações Educativas 2023"
+            title: "Formações e justiça restaurativa"
         },
         {
             url: "https://drive.google.com/file/d/1flWtDGONILOhzwHCnF33XzsQosUaITpR/preview",
             thumb: "https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1000&auto=format&fit=crop",
-            title: "Círculos de Paz"
+            title: "Projeto Trilhando a Paz - NUREPDH 2ª DIREC/MP RN e Escola Estadual Francisco Barbosa"
         },
         {
             url: "https://drive.google.com/file/d/1l4BMRWVp8Bt7iN-9TtwJwYauh7Ql9p8h/preview",
             thumb: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=1000&auto=format&fit=crop",
-            title: "Mediação de Conflitos"
+            title: "Embaixadores da Paz - Escola Estadual Dr. Antônio de Souza"
         },
         {
             url: "https://drive.google.com/file/d/1emSVCo-wr5Ob2QVqwpVl9PdhCspK_6tp/preview",
             thumb: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=1000&auto=format&fit=crop",
-            title: "Depoimentos e Impacto"
+            title: "Cerimônia de posse - Alunos Embaixadores da Paz"
         },
         {
             url: "https://drive.google.com/file/d/1r-v9MShjYoGLVXi90s2AvkPyaQ8yFaRO/preview",
             thumb: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop",
-            title: "Entrevista Rádio Escolar"
+            title: "Relato de Experiência: Protagonismo Juvenil e Cultura de Paz - CEEP Lourdinha Guerra."
         }
     ];
 
