@@ -181,7 +181,7 @@ const App: React.FC = () => {
                             <span className="block text-transparent bg-clip-text bg-gradient-to-b dark:from-slate-100 dark:to-slate-400 from-slate-900 to-slate-600 pb-2">
                                 A cultura de paz como prática institucional:
                             </span>
-                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 animate-[pulse_4s_ease-in-out_infinite]">
+                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 animate-[pulse_4s_ease-in-out_infinite] pb-4">
                                 a identidade pedagógica da 2ª DIREC
                             </span>
                         </h1>
