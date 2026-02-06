@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
     BookOpen, Home, Activity, TrendingUp, Users, Video, Image as ImageIcon, 
     FileText, Award, QrCode, Share2, Info, ArrowRight, ExternalLink, Play,
-    Sun, Moon, Menu, X, BookMarked
+    Sun, Moon, Menu, X, BookMarked, Target
 } from 'lucide-react';
 import { SectionWrapper } from './components/SectionWrapper';
 import { ChartGroup } from './components/ChartGroup';
@@ -221,7 +221,13 @@ const App: React.FC = () => {
                     </p>
                 </SectionWrapper>
 
-                <SectionWrapper id="fundamentacao" title="2. Fundamentação Teórica" icon={<Info className="w-6 h-6" />}>
+                <SectionWrapper id="objetivo" title="2. Objetivo Geral" icon={<Target className="w-6 h-6" />}>
+                    <p>
+                        Promover uma cultura de não violência no ambiente escolar, fortalecendo vínculos, o cuidado emocional e a convivência pacífica, por meio de ações integradas de educação para a paz, justiça restaurativa, saúde mental, protagonismo juvenil e fortalecimento da rede escola-família.
+                    </p>
+                </SectionWrapper>
+
+                <SectionWrapper id="fundamentacao" title="3. Fundamentação Teórica" icon={<Info className="w-6 h-6" />}>
                     <p>
                         A construção de uma cultura de paz na escola exige uma abordagem educativa integral. Segundo Xesús R. Jares (1999), 
                         educar para a paz implica desenvolver competências para o diálogo. Edgar Morin (2000) reforça a ética planetária. 
@@ -229,7 +235,7 @@ const App: React.FC = () => {
                     </p>
                 </SectionWrapper>
 
-                <SectionWrapper id="metodologia" title="3. Metodologia" icon={<Activity className="w-6 h-6" />}>
+                <SectionWrapper id="metodologia" title="4. Metodologia" icon={<Activity className="w-6 h-6" />}>
                     <p>
                         A metodologia adotada foi de natureza qualitativa e descritiva, baseada em análise documental dos planos de ação, 
                         relatórios anuais e projetos específicos. Foram utilizados instrumentos de monitoramento como formulários digitais 
@@ -237,7 +243,7 @@ const App: React.FC = () => {
                     </p>
                 </SectionWrapper>
 
-                <SectionWrapper id="clima-2024" title="4. Avaliação do Clima Escolar 2024" icon={<TrendingUp className="w-6 h-6" />}>
+                <SectionWrapper id="clima-2024" title="5. Avaliação do Clima Escolar 2024" icon={<TrendingUp className="w-6 h-6" />}>
                     <p className="mb-8 p-4 dark:bg-slate-800/50 bg-blue-50/80 rounded-xl border-l-4 border-blue-500 text-slate-700 dark:text-slate-300">
                         Com base nas respostas de <strong className="dark:text-white text-slate-900">4.271 participantes</strong>, esta avaliação analisa o clima escolar nas instituições da 2ª DIREC.
                     </p>
@@ -254,7 +260,7 @@ const App: React.FC = () => {
                     </div>
                 </SectionWrapper>
 
-                <SectionWrapper id="clima-2025" title="5. Avaliação do Clima Escolar 2025" icon={<TrendingUp className="w-6 h-6" />}>
+                <SectionWrapper id="clima-2025" title="6. Avaliação do Clima Escolar 2025" icon={<TrendingUp className="w-6 h-6" />}>
                     <p className="mb-8 p-4 dark:bg-slate-800/50 bg-purple-50/80 rounded-xl border-l-4 border-purple-500 text-slate-700 dark:text-slate-300">
                         Dados consolidados de 2025 (<strong className="dark:text-white text-slate-900">1.399 respostas</strong>) mostrando a evolução dos indicadores após intervenções.
                     </p>
@@ -271,11 +277,11 @@ const App: React.FC = () => {
                     </div>
                 </SectionWrapper>
 
-                <SectionWrapper id="desenvolvimento" title="6. Desenvolvimento e Resultados" icon={<Award className="w-6 h-6" />} defaultExpanded>
+                <SectionWrapper id="desenvolvimento" title="7. Desenvolvimento e Resultados" icon={<Award className="w-6 h-6" />} defaultExpanded>
                     <Timeline events={timelineEvents} />
                 </SectionWrapper>
 
-                <SectionWrapper id="impactos" title="7. Impactos e Considerações Finais" icon={<FileText className="w-6 h-6" />}>
+                <SectionWrapper id="impactos" title="8. Impactos e Considerações Finais" icon={<FileText className="w-6 h-6" />}>
                     <div className="space-y-6">
                         <p>
                             Os resultados demonstraram fortalecimento do clima escolar, redução dos conflitos interpessoais e ampliação 
