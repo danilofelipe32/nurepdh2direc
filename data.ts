@@ -287,7 +287,7 @@ export const documents: DocumentItem[] = [
     { title: 'Relatório Retrospectiva', url: 'https://drive.google.com/file/d/1PgGA6umiy4I5OZJkCn7IVb2g09Mne1fx/view?usp=drive_link' },
     { title: 'PROMAPE', url: '#' },
     { title: 'Implantação de rede família-escola', url: '#' },
-    { title: 'Mediação de conflitos e práticas restaurativas', url: '#' }
+    { title: 'Protocolo de Acolhimento Emocional Escolar', url: '#' }
 ];
 
 export const galleryImages = [
