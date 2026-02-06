@@ -176,8 +176,8 @@ const App: React.FC = () => {
                             2ª DIREC/RN
                         </div>
                         
-                        {/* Título Atualizado com 2 cores e animação */}
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-8 drop-shadow-2xl max-w-6xl mx-auto leading-tight">
+                        {/* Título Atualizado com 2 cores e animação e Z-INDEX AJUSTADO */}
+                        <h1 className="relative z-50 text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-8 drop-shadow-2xl max-w-6xl mx-auto leading-tight">
                             <span className="block text-transparent bg-clip-text bg-gradient-to-b dark:from-slate-100 dark:to-slate-400 from-slate-900 to-slate-600 pb-2">
                                 A cultura de paz como prática institucional:
                             </span>
