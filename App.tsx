@@ -85,7 +85,7 @@ const App: React.FC = () => {
             title: "Cerimônia de posse - Alunos Embaixadores da Paz"
         },
         {
-            url: "https://drive.google.com/file/d/1r-v9MShjYoGLVXi90s2AvkPyaQ8yFaRO/preview",
+            url: "https://drive.google.com/file/d/1avm8DrXCy15Zgy9W05zvIMbVif81Ter1/preview",
             thumb: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop",
             title: "Relato de Experiência: Protagonismo Juvenil e Cultura de Paz - CEEP Lourdinha Guerra."
         }
