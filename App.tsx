@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { 
     BookOpen, Home, Activity, TrendingUp, Users, Video, Image as ImageIcon, 
@@ -61,6 +62,11 @@ const App: React.FC = () => {
         } else {
             window.open(url, '_blank', 'noopener,noreferrer');
         }
+    };
+
+    // Helper para otimizar imagens do Imgur (Thumbnail L = Large Thumbnail 640x640)
+    const getOptimizedImgurUrl = (url: string) => {
+        return url.replace(/(\.[^.]+)$/, 'l$1');
     };
 
     const videoData = [
@@ -302,7 +308,8 @@ const App: React.FC = () => {
                         <ImageIcon className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 text-orange-500" />
                         <span>Galeria de Momentos</span>
                     </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                    {/* Alteração: grid-cols-2 no mobile (padrao) e grid-cols-3 no desktop */}
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                         {galleryImages.slice(0, 12).map((src, idx) => (
                             <div 
                                 key={idx} 
@@ -311,10 +318,12 @@ const App: React.FC = () => {
                             >
                                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-10" />
                                 <img 
-                                    src={src} 
+                                    src={getOptimizedImgurUrl(src)} 
                                     alt={`Galeria ${idx}`} 
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                                    loading="lazy" 
+                                    loading="lazy"
+                                    decoding="async"
+                                    fetchPriority="low"
                                 />
                             </div>
                         ))}
