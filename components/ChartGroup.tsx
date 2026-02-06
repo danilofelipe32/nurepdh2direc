@@ -136,7 +136,7 @@ const ChartCard: React.FC<{ chart: ChartConfig }> = ({ chart }) => {
     })) : [];
 
     return (
-        <div className="dark:bg-slate-900/60 bg-white/60 backdrop-blur-xl rounded-2xl p-5 border dark:border-white/5 border-slate-200 shadow-xl hover:shadow-2xl dark:hover:bg-slate-900/70 hover:bg-white/80 transition-all duration-500 group flex flex-col h-[32rem] relative overflow-hidden">
+        <div className="dark:bg-slate-900/60 bg-white/60 backdrop-blur-xl rounded-2xl p-4 sm:p-5 border dark:border-white/5 border-slate-200 shadow-xl hover:shadow-2xl dark:hover:bg-slate-900/70 hover:bg-white/80 transition-all duration-500 group flex flex-col h-[28rem] sm:h-[32rem] relative overflow-hidden">
             
             {/* Header */}
             <div className="flex items-start gap-3 mb-4 relative z-10 shrink-0">
@@ -144,7 +144,7 @@ const ChartCard: React.FC<{ chart: ChartConfig }> = ({ chart }) => {
                     className="w-1 h-8 rounded-r-lg mt-1 shadow-[0_0_10px_currentColor]"
                     style={{ backgroundColor: baseColor, color: baseColor }}
                 ></div>
-                <h4 className="dark:text-slate-100 text-slate-800 font-semibold text-lg leading-tight tracking-tight drop-shadow-sm">
+                <h4 className="dark:text-slate-100 text-slate-800 font-semibold text-base sm:text-lg leading-tight tracking-tight drop-shadow-sm">
                     {chart.title}
                 </h4>
             </div>

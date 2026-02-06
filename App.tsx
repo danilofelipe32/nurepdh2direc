@@ -95,8 +95,8 @@ const App: React.FC = () => {
         <div className="min-h-screen font-sans selection:bg-orange-500/30 transition-colors duration-300">
             
             {/* Navbar Glass */}
-            <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'dark:bg-slate-900/90 bg-white/90 backdrop-blur-md dark:border-white/5 border-slate-200/50 border-b py-3 shadow-sm' : 'bg-transparent py-6'}`}>
-                <div className="container mx-auto px-6 flex justify-between items-center relative">
+            <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'dark:bg-slate-900/90 bg-white/90 backdrop-blur-md dark:border-white/5 border-slate-200/50 border-b py-3 shadow-sm' : 'bg-transparent py-4 sm:py-6'}`}>
+                <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center relative">
                     <div className="dark:text-white text-slate-800 font-bold text-lg tracking-wider flex items-center gap-2 z-20">
                         <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                         NUREPDH
@@ -169,15 +169,15 @@ const App: React.FC = () => {
                     <div className="absolute inset-0 dark:bg-gradient-to-b dark:from-slate-950/80 dark:via-slate-900/80 dark:to-slate-950 bg-gradient-to-b from-white/80 via-slate-100/80 to-slate-50"></div>
                 </div>
                 
-                <div className="relative z-10 container mx-auto px-6 text-center">
+                <div className="relative z-10 container mx-auto px-4 sm:px-6 text-center">
                     <div className="animate-[fade-in-up_1s_ease-out]">
-                        <div className="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-500 text-sm font-bold tracking-widest uppercase mb-6 backdrop-blur-sm">
+                        <div className="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-orange-500/10 border border-orange-500/30 text-orange-500 text-xs sm:text-sm font-bold tracking-widest uppercase mb-6 backdrop-blur-sm">
                             <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
                             2ª DIREC/RN
                         </div>
                         
                         {/* Título Atualizado com 2 cores e animação e Z-INDEX AJUSTADO */}
-                        <h1 className="relative z-50 text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-8 drop-shadow-2xl max-w-6xl mx-auto leading-tight">
+                        <h1 className="relative z-50 text-3xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-8 drop-shadow-2xl max-w-6xl mx-auto leading-tight">
                             <span className="block text-transparent bg-clip-text bg-gradient-to-b dark:from-slate-100 dark:to-slate-400 from-slate-900 to-slate-600 pb-2">
                                 A cultura de paz como prática institucional:
                             </span>
@@ -186,12 +186,12 @@ const App: React.FC = () => {
                             </span>
                         </h1>
 
-                        <p className="text-lg sm:text-2xl dark:text-slate-300 text-slate-700 max-w-3xl mx-auto font-light leading-relaxed mb-10">
+                        <p className="text-base sm:text-2xl dark:text-slate-300 text-slate-700 max-w-3xl mx-auto font-light leading-relaxed mb-10">
                             Uma experiência de transformação social: promovendo a <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Cultura de Paz</span> e <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Direitos Humanos</span> nas escolas (2023-2026).
                         </p>
                         
                         <div className="flex justify-center gap-4">
-                            <button onClick={() => document.getElementById('resumo')?.scrollIntoView({behavior: 'smooth'})} className="px-8 py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] flex items-center gap-2">
+                            <button onClick={() => document.getElementById('resumo')?.scrollIntoView({behavior: 'smooth'})} className="px-6 py-3 sm:px-8 sm:py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] flex items-center gap-2 text-sm sm:text-base">
                                 Iniciar Leitura <ArrowRight size={20} />
                             </button>
                         </div>
@@ -203,7 +203,7 @@ const App: React.FC = () => {
                 </div>
             </header>
 
-            <main className="container mx-auto px-4 sm:px-6 py-20 space-y-12 max-w-6xl">
+            <main className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-8 sm:space-y-12 max-w-6xl">
                 
                 <SectionWrapper id="resumo" title="Resumo" icon={<Home className="w-6 h-6" />} defaultExpanded>
                     <p>
@@ -288,21 +288,21 @@ const App: React.FC = () => {
                             do sentimento de pertencimento. O legado deste trabalho é um exemplo de que a educação pode ser instrumento 
                             de reconstrução social.
                         </p>
-                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 p-8 text-white shadow-2xl">
+                        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-orange-500 to-red-600 p-6 sm:p-8 text-white shadow-2xl">
                             <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
-                            <h4 className="font-bold text-2xl mb-2 relative z-10">Referência Estadual</h4>
-                            <p className="text-white/90 relative z-10 text-lg">O NUREPDH consolidou-se como modelo, inspirando a portaria SEEC/RN que instituiu núcleos em todas as regionais.</p>
+                            <h4 className="font-bold text-xl sm:text-2xl mb-2 relative z-10">Referência Estadual</h4>
+                            <p className="text-white/90 relative z-10 text-base sm:text-lg">O NUREPDH consolidou-se como modelo, inspirando a portaria SEEC/RN que instituiu núcleos em todas as regionais.</p>
                         </div>
                     </div>
                 </SectionWrapper>
 
                 {/* Photos */}
-                <section className="py-12">
-                    <h2 className="flex items-center text-3xl font-bold dark:text-white text-slate-900 mb-8 pl-4 border-l-4 border-orange-500">
-                        <ImageIcon className="w-8 h-8 mr-4 text-orange-500" />
+                <section className="py-8 sm:py-12">
+                    <h2 className="flex items-center text-2xl sm:text-3xl font-bold dark:text-white text-slate-900 mb-6 sm:mb-8 pl-4 border-l-4 border-orange-500">
+                        <ImageIcon className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 text-orange-500" />
                         <span>Galeria de Momentos</span>
                     </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                         {galleryImages.slice(0, 12).map((src, idx) => (
                             <div 
                                 key={idx} 
@@ -323,11 +323,11 @@ const App: React.FC = () => {
 
                 {/* Videos */}
                 <section className="py-8">
-                    <h2 className="flex items-center text-3xl font-bold dark:text-white text-slate-900 mb-8 pl-4 border-l-4 border-blue-500">
-                        <Video className="w-8 h-8 mr-4 text-blue-500" />
+                    <h2 className="flex items-center text-2xl sm:text-3xl font-bold dark:text-white text-slate-900 mb-6 sm:mb-8 pl-4 border-l-4 border-blue-500">
+                        <Video className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 text-blue-500" />
                         <span>Registros Audiovisuais</span>
                     </h2>
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                          {videoData.map((video, idx) => (
                              <div 
                                 key={idx} 
@@ -340,10 +340,10 @@ const App: React.FC = () => {
                                     className="w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                    <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                                        <Play className="w-6 h-6 text-white fill-white ml-1" />
+                                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                                        <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white fill-white ml-1" />
                                     </div>
-                                    <h3 className="mt-4 text-lg font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">{video.title}</h3>
+                                    <h3 className="mt-4 px-4 text-center text-sm sm:text-lg font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">{video.title}</h3>
                                 </div>
                                 <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent pointer-events-none"></div>
                             </div>
@@ -352,21 +352,21 @@ const App: React.FC = () => {
                 </section>
 
                 {/* Planos e Documentos */}
-                <section className="py-8 grid md:grid-cols-2 gap-10">
+                <section className="py-8 grid md:grid-cols-2 gap-8 sm:gap-10">
                     <div>
-                        <h2 className="flex items-center text-2xl font-bold dark:text-white text-slate-900 mb-6">
-                            <FileText className="w-6 h-6 mr-3 text-orange-500" />
+                        <h2 className="flex items-center text-xl sm:text-2xl font-bold dark:text-white text-slate-900 mb-4 sm:mb-6">
+                            <FileText className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-orange-500" />
                             Planos de Ação
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-3 sm:space-y-4">
                             {plans.map((plan, idx) => (
                                 <div 
                                     key={idx}
                                     onClick={() => shareLink(plan.title, plan.url)}
-                                    className="relative neon-border-animation group p-5 dark:bg-slate-900 bg-slate-50 rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300"
+                                    className="relative neon-border-animation group p-4 sm:p-5 dark:bg-slate-900 bg-slate-50 rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300"
                                 >
                                     <div className="flex justify-between items-center relative z-10">
-                                        <span className="font-medium dark:text-slate-200 text-slate-700 group-hover:text-orange-600 dark:group-hover:text-white transition-colors">{plan.title}</span>
+                                        <span className="font-medium dark:text-slate-200 text-slate-700 group-hover:text-orange-600 dark:group-hover:text-white transition-colors text-sm sm:text-base">{plan.title}</span>
                                         <div className="p-2 rounded-full dark:bg-white/5 bg-slate-100 group-hover:bg-orange-500 dark:group-hover:bg-orange-500 text-slate-400 group-hover:text-white transition-all">
                                             <ExternalLink className="w-4 h-4" />
                                         </div>
@@ -376,19 +376,19 @@ const App: React.FC = () => {
                         </div>
                     </div>
                     <div>
-                        <h2 className="flex items-center text-2xl font-bold dark:text-white text-slate-900 mb-6">
-                            <FileText className="w-6 h-6 mr-3 text-orange-500" />
+                        <h2 className="flex items-center text-xl sm:text-2xl font-bold dark:text-white text-slate-900 mb-4 sm:mb-6">
+                            <FileText className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-orange-500" />
                             Documentos
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-3 sm:space-y-4">
                             {documents.map((doc, idx) => (
                                 <div 
                                     key={idx}
                                     onClick={() => shareLink(doc.title, doc.url)}
-                                    className="relative neon-border-animation group p-5 dark:bg-slate-900 bg-slate-50 rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300"
+                                    className="relative neon-border-animation group p-4 sm:p-5 dark:bg-slate-900 bg-slate-50 rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300"
                                 >
                                     <div className="flex justify-between items-center relative z-10">
-                                        <span className="font-medium dark:text-slate-200 text-slate-700 group-hover:text-orange-600 dark:group-hover:text-white transition-colors">{doc.title}</span>
+                                        <span className="font-medium dark:text-slate-200 text-slate-700 group-hover:text-orange-600 dark:group-hover:text-white transition-colors text-sm sm:text-base">{doc.title}</span>
                                         <div className="p-2 rounded-full dark:bg-white/5 bg-slate-100 group-hover:bg-orange-500 dark:group-hover:bg-orange-500 text-slate-400 group-hover:text-white transition-all">
                                             <ExternalLink className="w-4 h-4" />
                                         </div>
@@ -402,7 +402,7 @@ const App: React.FC = () => {
                 <SectionWrapper id="referencias" title="Referências" icon={<BookMarked className="w-6 h-6" />}>
                     <ul className="space-y-4">
                         {references.map((ref, idx) => (
-                            <li key={idx} className="flex gap-3 text-base dark:text-slate-400 text-slate-600 leading-relaxed">
+                            <li key={idx} className="flex gap-3 text-sm sm:text-base dark:text-slate-400 text-slate-600 leading-relaxed">
                                 <span className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-2.5 shrink-0"></span>
                                 <span>{ref}</span>
                             </li>
@@ -411,22 +411,22 @@ const App: React.FC = () => {
                 </SectionWrapper>
 
                 {/* QR Code */}
-                <section className="py-20 flex flex-col items-center justify-center text-center relative">
+                <section className="py-12 sm:py-20 flex flex-col items-center justify-center text-center relative">
                     <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 to-transparent rounded-3xl -z-10"></div>
-                    <h2 className="flex items-center text-3xl font-bold dark:text-white text-slate-900 mb-8">
-                        <QrCode className="w-8 h-8 mr-4 text-orange-500" />
+                    <h2 className="flex items-center text-2xl sm:text-3xl font-bold dark:text-white text-slate-900 mb-6 sm:mb-8">
+                        <QrCode className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 text-orange-500" />
                         Acesse o Aplicativo
                     </h2>
                     <div className="bg-white p-4 rounded-3xl shadow-[0_0_40px_rgba(255,255,255,0.1)] dark:shadow-[0_0_40px_rgba(0,0,0,0.3)] relative group border border-slate-100">
                         <div className="absolute inset-0 bg-orange-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
-                        <img src="https://i.imgur.com/5N6Lt0f.png" alt="QR Code" className="w-56 h-56 relative z-10" />
+                        <img src="https://i.imgur.com/5N6Lt0f.png" alt="QR Code" className="w-40 h-40 sm:w-56 sm:h-56 relative z-10" />
                     </div>
-                    <p className="mt-6 dark:text-slate-400 text-slate-600 text-lg">Escaneie para acessar o material completo e dados detalhados.</p>
+                    <p className="mt-6 dark:text-slate-400 text-slate-600 text-base sm:text-lg">Escaneie para acessar o material completo e dados detalhados.</p>
                 </section>
             </main>
 
             {/* Footer */}
-            <footer className="dark:bg-slate-950 bg-slate-100 border-t dark:border-white/5 border-slate-200 py-12 text-center text-slate-500">
+            <footer className="dark:bg-slate-950 bg-slate-100 border-t dark:border-white/5 border-slate-200 py-8 sm:py-12 text-center text-slate-500">
                 <div className="container mx-auto px-6">
                     <p className="text-base font-medium dark:text-slate-400 text-slate-600">Autoras: Albeísa Farias e Terezinha Saraiva</p>
                     <p className="text-sm mt-2">Parnamirim - RN, 2025</p>

@@ -7,7 +7,7 @@ const FlashCard: React.FC<{ event: TimelineEvent }> = ({ event }) => {
 
     return (
         <div 
-            className="w-full h-[30rem] relative cursor-pointer group perspective-1000 mb-10 md:mb-0 md:w-[48%] mx-auto"
+            className="w-full h-[26rem] sm:h-[30rem] relative cursor-pointer group perspective-1000 mb-10 md:mb-0 md:w-[48%] mx-auto"
             onClick={() => setIsFlipped(!isFlipped)}
         >
             <div 
@@ -20,19 +20,19 @@ const FlashCard: React.FC<{ event: TimelineEvent }> = ({ event }) => {
                 <div className="absolute inset-0 w-full h-full dark:bg-slate-900/60 bg-white/80 backdrop-blur-xl border dark:border-white/10 border-slate-200 rounded-3xl flex flex-col justify-center items-center p-6 text-center backface-hidden z-20 shadow-2xl group-hover:border-orange-500/30 transition-colors overflow-hidden">
                     <div className="neon-border-animation absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                     
-                    <h3 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-orange-400 via-pink-500 to-purple-500 mb-4 drop-shadow-[0_0_15px_rgba(249,115,22,0.4)]">
+                    <h3 className="text-5xl sm:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-orange-400 via-pink-500 to-purple-500 mb-4 drop-shadow-[0_0_15px_rgba(249,115,22,0.4)]">
                         {event.year}
                     </h3>
-                    <p className="text-2xl dark:text-white text-slate-800 font-medium">{event.title}</p>
+                    <p className="text-xl sm:text-2xl dark:text-white text-slate-800 font-medium">{event.title}</p>
                     <div className="mt-8 flex items-center text-xs text-orange-500 font-bold uppercase tracking-widest gap-2 bg-orange-500/10 px-4 py-2 rounded-full border border-orange-500/20">
                         <span>Ver Detalhes</span> <ArrowRight size={14} />
                     </div>
                 </div>
 
                 {/* Back */}
-                <div className="absolute inset-0 w-full h-full dark:bg-slate-800/90 bg-white border border-orange-500/30 rounded-3xl flex flex-col justify-start pt-14 items-center p-8 text-center backface-hidden rotate-y-180 z-10 shadow-[0_0_30px_rgba(249,115,22,0.15)] overflow-hidden">
-                    <h4 className="font-bold text-xl mb-4 text-orange-500 leading-tight">{event.title}</h4>
-                    <p className="text-base dark:text-slate-200 text-slate-600 leading-relaxed font-light">{event.description}</p>
+                <div className="absolute inset-0 w-full h-full dark:bg-slate-800/90 bg-white border border-orange-500/30 rounded-3xl flex flex-col justify-start pt-10 sm:pt-14 items-center p-6 sm:p-8 text-center backface-hidden rotate-y-180 z-10 shadow-[0_0_30px_rgba(249,115,22,0.15)] overflow-hidden">
+                    <h4 className="font-bold text-lg sm:text-xl mb-4 text-orange-500 leading-tight">{event.title}</h4>
+                    <p className="text-sm sm:text-base dark:text-slate-200 text-slate-600 leading-relaxed font-light">{event.description}</p>
                     <button className="mt-auto mb-4 dark:text-slate-500 text-slate-400 hover:text-orange-500 dark:hover:text-white transition-colors text-sm">Voltar</button>
                 </div>
             </div>
@@ -42,11 +42,11 @@ const FlashCard: React.FC<{ event: TimelineEvent }> = ({ event }) => {
 
 export const Timeline: React.FC<{ events: TimelineEvent[] }> = ({ events }) => {
     return (
-        <div className="relative py-12">
+        <div className="relative py-8 sm:py-12">
             {/* Vertical Line for Desktop */}
             <div className="hidden md:block absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-full bg-gradient-to-b from-transparent via-orange-500/50 to-transparent"></div>
 
-            <div className="flex flex-col gap-16 md:gap-24">
+            <div className="flex flex-col gap-8 md:gap-24">
                 {events.map((event, index) => (
                     <div 
                         key={event.year} 
