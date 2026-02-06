@@ -175,9 +175,17 @@ const App: React.FC = () => {
                             <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
                             2ª DIREC/RN
                         </div>
-                        <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b dark:from-white dark:to-slate-400 from-slate-900 to-slate-600 mb-8 drop-shadow-2xl">
-                            Trajetória NUREPDH
+                        
+                        {/* Título Atualizado com 2 cores e animação */}
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-8 drop-shadow-2xl max-w-6xl mx-auto leading-tight">
+                            <span className="block text-transparent bg-clip-text bg-gradient-to-b dark:from-slate-100 dark:to-slate-400 from-slate-900 to-slate-600 pb-2">
+                                A cultura de paz como prática institucional:
+                            </span>
+                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 animate-[pulse_4s_ease-in-out_infinite]">
+                                a identidade pedagógica da 2ª DIREC
+                            </span>
                         </h1>
+
                         <p className="text-lg sm:text-2xl dark:text-slate-300 text-slate-700 max-w-3xl mx-auto font-light leading-relaxed mb-10">
                             Uma experiência de transformação social: promovendo a <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Cultura de Paz</span> e <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Direitos Humanos</span> nas escolas (2023-2025).
                         </p>
