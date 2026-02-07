@@ -486,11 +486,15 @@ const App: React.FC = () => {
                     <div className="mt-8 grid md:grid-cols-2 gap-6 text-sm">
                         <div className="dark:bg-white/5 bg-white p-6 rounded-xl border dark:border-white/5 border-slate-200 shadow-sm backdrop-blur-sm">
                             <h4 className="text-green-500 font-bold mb-2 text-lg flex items-center gap-2"><div className="w-2 h-2 bg-green-500 rounded-full"></div> Pontos Fortes</h4>
-                            <p className="dark:text-slate-300 text-slate-600">Clareza nos canais de suporte (86.5%) e ambiente percebido como inclusivo (70.1%).</p>
+                            <p className="dark:text-slate-300 text-slate-600 leading-relaxed">
+                                A clareza sobre os canais de suporte foi um destaque positivo, com 86,5% dos participantes afirmando saber a quem recorrer em situações de conflito. Além disso, o ambiente escolar demonstrou-se acolhedor, sendo percebido como inclusivo por 70,1% da comunidade. As relações institucionais também se mostraram sólidas, com 80,78% relatando respeito frequente entre professores e funcionários.
+                            </p>
                         </div>
                         <div className="dark:bg-white/5 bg-white p-6 rounded-xl border dark:border-white/5 border-slate-200 shadow-sm backdrop-blur-sm">
                             <h4 className="text-red-500 font-bold mb-2 text-lg flex items-center gap-2"><div className="w-2 h-2 bg-red-500 rounded-full"></div> Atenção Necessária</h4>
-                            <p className="dark:text-slate-300 text-slate-600">Violência presenciada (26.9%) e respeito entre alunos que ocorre apenas "às vezes" (40%).</p>
+                            <p className="dark:text-slate-300 text-slate-600 leading-relaxed">
+                                O cenário revelou desafios críticos: 26,9% dos respondentes presenciaram ou sofreram violência, e o respeito entre alunos foi classificado como instável ("às vezes") por 45,19%. Um dado alarmante foi a percepção sobre o bullying, onde 80% sentiram falta de suporte específico da escola, indicando uma lacuna urgente nas estratégias de intervenção.
+                            </p>
                         </div>
                     </div>
                 </SectionWrapper>
@@ -503,11 +507,15 @@ const App: React.FC = () => {
                     <div className="mt-8 grid md:grid-cols-2 gap-6 text-sm">
                         <div className="dark:bg-white/5 bg-white p-6 rounded-xl border dark:border-white/5 border-slate-200 shadow-sm backdrop-blur-sm">
                             <h4 className="text-orange-500 font-bold mb-2 text-lg flex items-center gap-2"><div className="w-2 h-2 bg-orange-500 rounded-full"></div> Avanços Significativos</h4>
-                            <p className="dark:text-slate-300 text-slate-600">Sentimento de segurança "Sempre" subiu para 45.2%. Violência presenciada caiu para 21.5%.</p>
+                            <p className="dark:text-slate-300 text-slate-600 leading-relaxed">
+                                Houve uma melhora substancial na sensação de segurança, com o índice "Sempre" subindo para 45,2%. A incidência de violência presenciada caiu para 21,5%, e a frequência diária desses atos reduziu pela metade (10,5%). Destaca-se o salto na percepção de suporte ao bullying, que saiu de 19% para 44,6%, refletindo a eficácia das novas políticas implementadas.
+                            </p>
                         </div>
                         <div className="dark:bg-white/5 bg-white p-6 rounded-xl border dark:border-white/5 border-slate-200 shadow-sm backdrop-blur-sm">
                             <h4 className="text-blue-500 font-bold mb-2 text-lg flex items-center gap-2"><div className="w-2 h-2 bg-blue-500 rounded-full"></div> Consolidação</h4>
-                            <p className="dark:text-slate-300 text-slate-600">89.2% sabem a quem recorrer. Conforto em participar aumentou significativamente.</p>
+                            <p className="dark:text-slate-300 text-slate-600 leading-relaxed">
+                                A rede de apoio se fortaleceu, com 89,2% sabendo exatamente a quem recorrer. O engajamento discente cresceu, com 45,5% sentindo-se sempre confortáveis em participar. A cultura de respeito institucional atingiu quase 90%, e a percepção de um ambiente inclusivo consolidou-se em 79,3%, demonstrando o enraizamento das práticas restaurativas.
+                            </p>
                         </div>
                     </div>
                 </SectionWrapper>
