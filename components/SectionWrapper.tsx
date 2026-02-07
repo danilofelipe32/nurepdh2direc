@@ -7,9 +7,10 @@ interface SectionWrapperProps {
     icon?: React.ReactNode;
     children: React.ReactNode;
     defaultExpanded?: boolean;
+    className?: string;
 }
 
-export const SectionWrapper: React.FC<SectionWrapperProps> = ({ id, title, icon, children, defaultExpanded = false }) => {
+export const SectionWrapper: React.FC<SectionWrapperProps> = ({ id, title, icon, children, defaultExpanded = false, className = '' }) => {
     const [isExpanded, setIsExpanded] = useState(defaultExpanded);
 
     return (
@@ -23,6 +24,7 @@ export const SectionWrapper: React.FC<SectionWrapperProps> = ({ id, title, icon,
                     ? 'dark:bg-slate-900/40 bg-white/80 dark:shadow-orange-500/5 shadow-orange-500/5 border-orange-500/20' 
                     : 'dark:bg-slate-900/20 bg-white/50 hover:bg-white/80 dark:hover:bg-slate-900/30 border-slate-200 dark:border-white/10'
                 }
+                ${className}
             `}
         >
             <div 

@@ -616,7 +616,12 @@ const App: React.FC = () => {
                     />
                 </section>
 
-                <SectionWrapper id="referencias" title="Referências" icon={<BookMarked className="w-6 h-6" />}>
+                <SectionWrapper 
+                    id="referencias" 
+                    title="Referências" 
+                    icon={<BookMarked className="w-6 h-6" />}
+                    className="mt-[15vh]"
+                >
                     <ul className="space-y-4">
                         {references.map((ref, idx) => (
                             <li key={idx} className="flex gap-3 text-sm sm:text-base dark:text-slate-400 text-slate-600 leading-relaxed">
