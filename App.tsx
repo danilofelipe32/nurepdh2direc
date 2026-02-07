@@ -100,11 +100,9 @@ const App: React.FC = () => {
     }, []);
 
     const handleCardClick = (card: CardData) => {
-        if (card.url && card.url !== '#') {
-            window.open(card.url, '_blank', 'noopener,noreferrer');
-        } else {
-            console.log("URL não disponível");
-        }
+        // A navegação agora é gerenciada nativamente pelo componente MorphingCardStack
+        // Isso permite comportamento padrão de links (middle click, hover, etc)
+        console.log("Card acessado:", card.title);
     };
 
     useEffect(() => {

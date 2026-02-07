@@ -1,10 +1,10 @@
 
 "use client"
 
-import { useState, type ReactNode } from "react"
+import React, { useState, type ReactNode } from "react"
 import { motion, AnimatePresence, LayoutGroup, type PanInfo } from "framer-motion"
 import { cn } from "../../lib/utils"
-import { Grid3X3, Layers, LayoutList } from "lucide-react"
+import { Grid3X3, Layers, LayoutList, ExternalLink } from "lucide-react"
 
 export type LayoutMode = "stack" | "grid" | "list"
 
@@ -154,11 +154,24 @@ export function MorphingCardStack({
               const styles = getLayoutStyles(card.stackPosition)
               const isExpanded = expandedCard === card.id
               const isTopCard = layout === "stack" && card.stackPosition === 0
+              
+              // Determine interactivity and link status
+              const hasUrl = card.url && card.url !== '#'
+              const isInteractive = layout !== "stack" || isTopCard
+              
+              // Use 'a' tag for valid links to ensure native browser behavior (middle click, open in new tab)
+              const Component = (hasUrl && isInteractive) ? motion.a : motion.div
 
               return (
-                <motion.div
+                <Component
                   key={card.id}
                   layoutId={card.id}
+                  // Link specific props
+                  href={(hasUrl && isInteractive) ? card.url : undefined}
+                  target={(hasUrl && isInteractive) ? "_blank" : undefined}
+                  rel={(hasUrl && isInteractive) ? "noopener noreferrer" : undefined}
+                  
+                  // Animation props
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{
                     opacity: 1,
@@ -172,21 +185,31 @@ export function MorphingCardStack({
                     stiffness: 300,
                     damping: 25,
                   }}
+                  
+                  // Drag props (only for top card in stack)
                   drag={isTopCard ? "x" : false}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.7}
                   onDragStart={() => setIsDragging(true)}
                   onDragEnd={handleDragEnd}
                   whileDrag={{ scale: 1.02, cursor: "grabbing" }}
-                  onClick={() => {
-                    if (isDragging) return
-                    // Se estiver em modo lista/grid ou for o cartão do topo no modo stack
-                    if(layout !== "stack" || isTopCard) {
+                  
+                  // Interaction handler
+                  onClick={(e: React.MouseEvent) => {
+                    if (isDragging) {
+                        e.preventDefault() // Prevent link navigation if dragging
+                        return
+                    }
+                    
+                    if (isInteractive) {
                          onCardClick?.(card)
+                    } else {
+                         e.preventDefault() // Prevent clicks on background stack cards
                     }
                   }}
+                  
                   className={cn(
-                    "cursor-pointer rounded-2xl border p-5 backdrop-blur-xl shadow-xl",
+                    "rounded-2xl border p-5 backdrop-blur-xl shadow-xl flex flex-col h-full",
                     "dark:bg-slate-900/90 bg-white/90 dark:border-white/10 border-slate-200",
                     "hover:border-orange-500/50 transition-colors",
                     layout === "stack" && "absolute w-full h-full",
@@ -194,9 +217,9 @@ export function MorphingCardStack({
                     layout === "grid" && "w-full aspect-[4/3]",
                     layout === "list" && "w-full",
                     isExpanded && "ring-2 ring-orange-500",
+                    (hasUrl && isInteractive) ? "cursor-pointer" : "cursor-default"
                   )}
                 >
-                  <div className="flex flex-col h-full">
                     <div className="flex items-start gap-4 mb-3">
                       {card.icon && (
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 text-orange-500 border border-slate-200 dark:border-white/10">
@@ -204,8 +227,19 @@ export function MorphingCardStack({
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
-                        <h3 className="font-bold text-slate-800 dark:text-slate-100 line-clamp-2 leading-tight text-lg">{card.title}</h3>
-                        <p className="text-xs font-mono text-orange-500 mt-1 uppercase tracking-wider opacity-80">Clique para abrir</p>
+                        <div className="flex justify-between items-start gap-2">
+                            <h3 className="font-bold text-slate-800 dark:text-slate-100 line-clamp-2 leading-tight text-lg group-hover:text-orange-500 transition-colors">
+                                {card.title}
+                            </h3>
+                            {hasUrl && isInteractive && (
+                                <ExternalLink className="w-4 h-4 text-slate-400 shrink-0 mt-1" />
+                            )}
+                        </div>
+                        {hasUrl && isInteractive && (
+                            <p className="text-xs font-mono text-orange-500 mt-1 uppercase tracking-wider opacity-80 flex items-center gap-1">
+                                Acessar Documento
+                            </p>
+                        )}
                       </div>
                     </div>
                     
@@ -219,14 +253,13 @@ export function MorphingCardStack({
                       >
                         {card.description}
                     </p>
-                  </div>
 
                   {isTopCard && layout === "stack" && (
-                    <div className="absolute -bottom-10 left-0 right-0 text-center animate-pulse">
+                    <div className="absolute -bottom-10 left-0 right-0 text-center animate-pulse pointer-events-none">
                       <span className="text-xs font-medium text-slate-400 dark:text-slate-500 bg-slate-200 dark:bg-white/10 px-3 py-1 rounded-full">Arraste para navegar</span>
                     </div>
                   )}
-                </motion.div>
+                </Component>
               )
             })}
           </AnimatePresence>

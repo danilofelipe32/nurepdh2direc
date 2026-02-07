@@ -285,9 +285,10 @@ export const documents: DocumentItem[] = [
     { title: 'Projeto Saúde Mental', url: 'https://drive.google.com/file/d/1-ButtstXEFyEnWfRiM1hz-8IFYEROU8B/view?usp=drive_link' },
     { title: 'Protocolo de Mediação de Conflitos', url: 'https://drive.google.com/file/d/1lOhunV8iSgmwHOVixOjvCZ3yG4I8Yr21/view?usp=drive_link' },
     { title: 'Relatório Retrospectiva', url: 'https://drive.google.com/file/d/1PgGA6umiy4I5OZJkCn7IVb2g09Mne1fx/view?usp=drive_link' },
-    { title: 'PROMAPE', url: 'https://example.com' },
-    { title: 'Implantação de rede família-escola', url: 'https://example.com' },
-    { title: 'Protocolo de Acolhimento Emocional Escolar', url: 'https://example.com' }
+    // URLs de teste funcionais para demonstração
+    { title: 'PROMAPE', url: 'https://www.google.com/search?q=PROMAPE+RN' }, 
+    { title: 'Implantação de rede família-escola', url: 'https://www.google.com/search?q=rede+familia+escola+RN' },
+    { title: 'Protocolo de Acolhimento Emocional Escolar', url: 'https://www.google.com/search?q=protocolo+acolhimento+emocional+escolar' }
 ];
 
 export const galleryImages = [
