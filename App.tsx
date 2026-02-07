@@ -407,24 +407,6 @@ const App: React.FC = () => {
                             Uma experiência de transformação social: promovendo a <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Cultura de Paz</span> e <span className="dark:text-white text-slate-900 font-medium border-b border-orange-500/50">Direitos Humanos</span> nas escolas (2023-2026).
                         </p>
                         
-                        {/* Search Bar in Hero Section - New Location */}
-                        <div className="w-full max-w-xl mx-auto mb-10 relative z-50 group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-purple-500/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            <button 
-                                onClick={() => setSearchOpen(true)}
-                                className="relative w-full flex items-center gap-4 px-6 py-4 rounded-full dark:bg-slate-900/60 bg-white/60 backdrop-blur-xl border dark:border-white/10 border-slate-200 shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 text-left"
-                            >
-                                <Search className="w-6 h-6 text-orange-500" />
-                                <div className="flex-grow">
-                                    <span className="block text-sm dark:text-slate-200 text-slate-700 font-medium">O que você procura?</span>
-                                    <span className="block text-xs dark:text-slate-400 text-slate-500">Digite para buscar gráficos, temas ou datas...</span>
-                                </div>
-                                <div className="hidden sm:flex items-center gap-1 px-2 py-1 rounded-lg bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/5">
-                                    <span className="text-xs font-mono dark:text-slate-400 text-slate-500">⌘ K</span>
-                                </div>
-                            </button>
-                        </div>
-                        
                         <div className="flex justify-center gap-4">
                             <button onClick={() => scrollToSection('resumo')} className="px-6 py-3 sm:px-8 sm:py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] flex items-center gap-2 text-sm sm:text-base">
                                 Iniciar Leitura <ArrowRight size={20} />
