@@ -52,6 +52,24 @@ const App: React.FC = () => {
         setTheme(prev => prev === 'dark' ? 'light' : 'dark');
     };
 
+    // Função de Scroll Suave Personalizada
+    const scrollToSection = (id: string) => {
+        const element = document.getElementById(id);
+        if (element) {
+            const offset = 80; // Altura aproximada da navbar fixa
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = element.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - offset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+        setMobileMenuOpen(false);
+    };
+
     const shareLink = async (title: string, url: string) => {
         if (navigator.share) {
             try {
@@ -68,6 +86,14 @@ const App: React.FC = () => {
     const getOptimizedImgurUrl = (url: string) => {
         return url.replace(/(\.[^.]+)$/, 'l$1');
     };
+
+    const navItems = [
+        { id: 'resumo', label: 'Resumo' },
+        { id: 'clima-2024', label: 'Diagnóstico' },
+        { id: 'clima-2025', label: 'Resultados' },
+        { id: 'desenvolvimento', label: 'Trajetória' },
+        { id: 'galeria', label: 'Galeria' },
+    ];
 
     const videoData = [
         {
@@ -103,13 +129,29 @@ const App: React.FC = () => {
             {/* Navbar Glass */}
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'dark:bg-slate-900/90 bg-white/90 backdrop-blur-md dark:border-white/5 border-slate-200/50 border-b py-3 shadow-sm' : 'bg-transparent py-4 sm:py-6'}`}>
                 <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center relative">
-                    <div className="dark:text-white text-slate-800 font-bold text-lg tracking-wider flex items-center gap-2 z-20">
+                    <div 
+                        className="dark:text-white text-slate-800 font-bold text-lg tracking-wider flex items-center gap-2 z-20 cursor-pointer"
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    >
                         <div className="w-2 h-2 rounded-full bg-orange-500"></div>
                         NUREPDH
                     </div>
                     
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-3">
+                    <div className="hidden md:flex items-center gap-6">
+                        <div className="hidden lg:flex items-center gap-6 mr-4 border-r dark:border-white/10 border-slate-300 pr-6 h-6">
+                            {navItems.map(item => (
+                                <button
+                                    key={item.id}
+                                    onClick={() => scrollToSection(item.id)}
+                                    className="text-sm font-medium dark:text-slate-300 text-slate-600 hover:text-orange-500 dark:hover:text-white transition-colors relative group"
+                                >
+                                    {item.label}
+                                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-orange-500 transition-all group-hover:w-full"></span>
+                                </button>
+                            ))}
+                        </div>
+
                         <button
                             onClick={toggleTheme}
                             className="p-2 rounded-full dark:bg-white/10 bg-slate-200 dark:text-slate-200 text-slate-600 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-300 border dark:border-white/10 border-transparent"
@@ -138,7 +180,19 @@ const App: React.FC = () => {
 
                     {/* Mobile Menu Overlay */}
                     {mobileMenuOpen && (
-                        <div className="md:hidden absolute top-full left-0 right-0 p-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 shadow-2xl flex flex-col gap-4 animate-[fade-in-down_0.3s_ease-out]">
+                        <div className="md:hidden absolute top-full left-0 right-0 p-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 shadow-2xl flex flex-col gap-3 animate-[fade-in-down_0.3s_ease-out] max-h-[80vh] overflow-y-auto">
+                            {navItems.map(item => (
+                                <button
+                                    key={item.id}
+                                    onClick={() => scrollToSection(item.id)}
+                                    className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 text-left text-slate-700 dark:text-slate-200 font-medium active:scale-95 transition-transform hover:bg-slate-100 dark:hover:bg-white/10"
+                                >
+                                    {item.label}
+                                </button>
+                            ))}
+
+                            <div className="h-px bg-slate-200 dark:bg-white/10 my-2"></div>
+
                             <button 
                                 onClick={() => { toggleTheme(); setMobileMenuOpen(false); }}
                                 className="flex items-center justify-between p-4 rounded-xl bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-200 font-medium active:scale-95 transition-transform"
@@ -197,14 +251,14 @@ const App: React.FC = () => {
                         </p>
                         
                         <div className="flex justify-center gap-4">
-                            <button onClick={() => document.getElementById('resumo')?.scrollIntoView({behavior: 'smooth'})} className="px-6 py-3 sm:px-8 sm:py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] flex items-center gap-2 text-sm sm:text-base">
+                            <button onClick={() => scrollToSection('resumo')} className="px-6 py-3 sm:px-8 sm:py-4 bg-orange-500 hover:bg-orange-600 text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] flex items-center gap-2 text-sm sm:text-base">
                                 Iniciar Leitura <ArrowRight size={20} />
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce dark:text-slate-500 text-slate-400">
+                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce dark:text-slate-500 text-slate-400 cursor-pointer" onClick={() => scrollToSection('resumo')}>
                     <ArrowRight className="rotate-90 w-6 h-6" />
                 </div>
             </header>
@@ -303,7 +357,7 @@ const App: React.FC = () => {
                 </SectionWrapper>
 
                 {/* Photos */}
-                <section className="py-8 sm:py-12">
+                <section id="galeria" className="py-8 sm:py-12">
                     <h2 className="flex items-center text-2xl sm:text-3xl font-bold dark:text-white text-slate-900 mb-6 sm:mb-8 pl-4 border-l-4 border-orange-500">
                         <ImageIcon className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 text-orange-500" />
                         <span>Galeria de Momentos</span>
