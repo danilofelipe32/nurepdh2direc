@@ -3,13 +3,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { 
     BookOpen, Home, Activity, TrendingUp, Users, Video, Image as ImageIcon, 
     FileText, Award, QrCode, Share2, Info, ArrowRight, ExternalLink, Play,
-    Sun, Moon, Menu, X, BookMarked, Target, Search, Instagram, Folders
+    Sun, Moon, Menu, X, BookMarked, Target, Search, Instagram, FolderOpen
 } from 'lucide-react';
 import { SectionWrapper } from './components/SectionWrapper';
 import { ChartGroup } from './components/ChartGroup';
 import { Timeline } from './components/Timeline';
-import { MorphingCardStack, CardData } from './components/ui/morphing-card-stack';
 import { CVModal, ImageModal, VideoModal } from './components/Modals';
+import { MorphingCardStack, CardData } from './components/ui/morphing-card-stack';
 import { charts2024, charts2025, timelineEvents, plans, documents, galleryImages, references } from './data';
 
 // Interface para itens de busca
@@ -75,29 +75,36 @@ const App: React.FC = () => {
         );
     }, [searchQuery, searchIndex]);
 
-    // Prepare data for MorphingCardStack
-    const documentsCardData: CardData[] = useMemo(() => {
+    // Prepare Cards for MorphingStack
+    const documentCards: CardData[] = useMemo(() => {
         const planCards = plans.map((p, i) => ({
             id: `plan-${i}`,
             title: p.title,
-            description: "Documento oficial de planejamento estratégico contendo metas, cronogramas e diretrizes anuais do NUREPDH.",
-            icon: <Target className="h-6 w-6" />,
+            description: "Plano de ação estratégico para implementação das metodologias do NUREPDH nas escolas.",
             url: p.url,
-            color: 'orange'
+            icon: <Target className="w-6 h-6" />,
+            color: "#f97316" // Orange
         }));
 
         const docCards = documents.map((d, i) => ({
             id: `doc-${i}`,
             title: d.title,
-            description: "Material de apoio técnico, protocolos de intervenção e relatórios de atividades para suporte às escolas.",
-            icon: <FileText className="h-6 w-6" />,
+            description: "Documentação oficial, protocolos e relatórios de acompanhamento das atividades.",
             url: d.url,
-            color: 'blue'
+            icon: <FileText className="w-6 h-6" />,
+            color: "#3b82f6" // Blue
         }));
 
-        // Interleave items or just concat. Let's place plans first as they are "higher level"
         return [...planCards, ...docCards];
     }, []);
+
+    const handleCardClick = (card: CardData) => {
+        if (card.url && card.url !== '#') {
+            window.open(card.url, '_blank', 'noopener,noreferrer');
+        } else {
+            console.log("URL não disponível");
+        }
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -158,18 +165,6 @@ const App: React.FC = () => {
         setSearchOpen(false); // Fecha a busca ao navegar
     };
 
-    const shareLink = async (title: string, url: string) => {
-        if (navigator.share) {
-            try {
-                await navigator.share({ title, url });
-            } catch (error) {
-                console.log('Error sharing', error);
-            }
-        } else {
-            window.open(url, '_blank', 'noopener,noreferrer');
-        }
-    };
-
     const getOptimizedImgurUrl = (url: string) => {
         return url.replace(/(\.[^.]+)$/, 'l$1');
     };
@@ -180,6 +175,7 @@ const App: React.FC = () => {
         { id: 'clima-2025', label: 'Resultados' },
         { id: 'desenvolvimento', label: 'Trajetória' },
         { id: 'galeria', label: 'Galeria' },
+        { id: 'planos', label: 'Documentos' },
     ];
 
     const videoData = [
@@ -604,27 +600,16 @@ const App: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Planos e Documentos REPLACED by Morphing Card Stack */}
-                <section className="py-12 relative overflow-hidden">
-                    {/* Background decorations for the section */}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl bg-gradient-to-r from-orange-500/5 to-blue-500/5 rounded-full blur-3xl -z-10"></div>
-                    
-                    <div className="text-center mb-10">
-                         <h2 className="flex items-center justify-center text-2xl sm:text-3xl font-bold dark:text-white text-slate-900 mb-4">
-                            <Folders className="w-8 h-8 mr-3 text-orange-500" />
-                            Central de Documentação
-                        </h2>
-                        <p className="dark:text-slate-400 text-slate-600 max-w-2xl mx-auto">
-                            Acesse os planos de ação estratégicos e documentos oficiais do NUREPDH.
-                        </p>
-                    </div>
-
+                {/* Planos e Documentos REPLACED WITH MORPHING STACK */}
+                <section id="planos" className="py-8">
+                    <h2 className="flex items-center text-2xl sm:text-3xl font-bold dark:text-white text-slate-900 mb-6 sm:mb-8 pl-4 border-l-4 border-orange-500">
+                        <FolderOpen className="w-6 h-6 sm:w-8 sm:h-8 mr-3 sm:mr-4 text-orange-500" />
+                        <span>Documentos e Planos</span>
+                    </h2>
                     <MorphingCardStack 
-                        cards={documentsCardData} 
+                        cards={documentCards} 
                         defaultLayout="stack"
-                        onCardClick={(card) => {
-                            if (card.url) shareLink(card.title, card.url);
-                        }}
+                        onCardClick={handleCardClick}
                     />
                 </section>
 

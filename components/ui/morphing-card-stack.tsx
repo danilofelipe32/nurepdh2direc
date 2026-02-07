@@ -13,7 +13,7 @@ export interface CardData {
   description: string
   icon?: ReactNode
   color?: string
-  url?: string // Added specifically for this app integration
+  url?: string
 }
 
 export interface MorphingCardStackProps {
@@ -96,7 +96,7 @@ export function MorphingCardStack({
   }
 
   const containerStyles = {
-    stack: "relative h-80 w-72 sm:h-80 sm:w-96", // Adjusted size for better content fit
+    stack: "relative h-64 w-72 sm:w-80 mx-auto mt-8 mb-12",
     grid: "grid grid-cols-1 sm:grid-cols-2 gap-4",
     list: "flex flex-col gap-3",
   }
@@ -104,32 +104,37 @@ export function MorphingCardStack({
   const displayCards = layout === "stack" ? getStackOrder() : cards.map((c, i) => ({ ...c, stackPosition: i }))
 
   return (
-    <div className={cn("space-y-6", className)}>
+    <div className={cn("space-y-6 w-full max-w-4xl mx-auto p-4", className)}>
       {/* Layout Toggle */}
-      <div className="flex items-center justify-center gap-1 rounded-lg dark:bg-slate-800/50 bg-slate-200/50 p-1 w-fit mx-auto backdrop-blur-sm border dark:border-white/5 border-slate-300">
-        {(Object.keys(layoutIcons) as LayoutMode[]).map((mode) => {
-          const Icon = layoutIcons[mode]
-          return (
-            <button
-              key={mode}
-              onClick={() => setLayout(mode)}
-              className={cn(
-                "rounded-md p-2 transition-all",
-                layout === mode
-                  ? "bg-orange-500 text-white shadow-md"
-                  : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 hover:bg-slate-300/50 dark:hover:bg-slate-700/50",
-              )}
-              aria-label={`Switch to ${mode} layout`}
-            >
-              <Icon className="h-4 w-4" />
-            </button>
-          )
-        })}
+      <div className="flex items-center justify-between">
+          <h3 className="text-xl font-bold dark:text-white text-slate-800">
+              Biblioteca Digital
+          </h3>
+          <div className="flex items-center justify-center gap-1 rounded-lg bg-slate-200 dark:bg-white/10 p-1 w-fit">
+            {(Object.keys(layoutIcons) as LayoutMode[]).map((mode) => {
+              const Icon = layoutIcons[mode]
+              return (
+                <button
+                  key={mode}
+                  onClick={() => setLayout(mode)}
+                  className={cn(
+                    "rounded-md p-2 transition-all",
+                    layout === mode
+                      ? "bg-orange-500 text-white shadow-md"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/20",
+                  )}
+                  aria-label={`Switch to ${mode} layout`}
+                >
+                  <Icon className="h-4 w-4" />
+                </button>
+              )
+            })}
+          </div>
       </div>
 
       {/* Cards Container */}
       <LayoutGroup>
-        <motion.div layout className={cn(containerStyles[layout], "mx-auto transition-all duration-500")}>
+        <motion.div layout className={cn(containerStyles[layout])}>
           <AnimatePresence mode="popLayout">
             {displayCards.map((card) => {
               const styles = getLayoutStyles(card.stackPosition)
@@ -143,7 +148,7 @@ export function MorphingCardStack({
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{
                     opacity: 1,
-                    scale: isExpanded ? 1.02 : 1,
+                    scale: isExpanded ? 1.05 : 1,
                     x: 0,
                     ...styles,
                   }}
@@ -161,53 +166,51 @@ export function MorphingCardStack({
                   whileDrag={{ scale: 1.02, cursor: "grabbing" }}
                   onClick={() => {
                     if (isDragging) return
-                    // If simple click in stack mode on non-top card, do nothing (or rotate)
-                    // If grid/list or top card, handle interaction
-                    onCardClick?.(card)
+                    // Se estiver em modo lista/grid ou for o cartão do topo no modo stack
+                    if(layout !== "stack" || isTopCard) {
+                         onCardClick?.(card)
+                    }
                   }}
                   className={cn(
-                    "cursor-pointer rounded-2xl border p-6 flex flex-col justify-between shadow-xl backdrop-blur-xl",
-                    "dark:bg-slate-900/90 bg-white/90 dark:border-white/10 border-slate-200", // Theme colors adapted
-                    "hover:border-orange-500/50 transition-colors duration-300",
-                    layout === "stack" && "absolute w-full h-full shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]",
-                    layout === "stack" && isTopCard && "cursor-grab active:cursor-grabbing",
+                    "cursor-pointer rounded-2xl border p-5 backdrop-blur-xl shadow-xl",
+                    "dark:bg-slate-900/90 bg-white/90 dark:border-white/10 border-slate-200",
+                    "hover:border-orange-500/50 transition-colors",
+                    layout === "stack" && "absolute w-full h-full",
+                    layout === "stack" && isTopCard && "cursor-grab active:cursor-grabbing shadow-[0_0_30px_rgba(0,0,0,0.2)]",
                     layout === "grid" && "w-full aspect-[4/3]",
                     layout === "list" && "w-full",
                     isExpanded && "ring-2 ring-orange-500",
                   )}
                 >
-                  <div className="flex items-start gap-4">
-                    {card.icon && (
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-orange-500 shadow-sm">
-                        {card.icon}
+                  <div className="flex flex-col h-full">
+                    <div className="flex items-start gap-4 mb-3">
+                      {card.icon && (
+                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 text-orange-500 border border-slate-200 dark:border-white/10">
+                          {card.icon}
+                        </div>
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-bold text-slate-800 dark:text-slate-100 line-clamp-2 leading-tight text-lg">{card.title}</h3>
+                        <p className="text-xs font-mono text-orange-500 mt-1 uppercase tracking-wider opacity-80">Clique para abrir</p>
                       </div>
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <h3 className="font-bold text-lg dark:text-slate-100 text-slate-800 leading-tight mb-2 line-clamp-2">{card.title}</h3>
-                      <p
+                    </div>
+                    
+                    <p
                         className={cn(
-                          "text-sm dark:text-slate-400 text-slate-600 font-light leading-relaxed",
-                          layout === "stack" && "line-clamp-4",
+                          "text-sm text-slate-600 dark:text-slate-400 mt-auto leading-relaxed",
+                          layout === "stack" && "line-clamp-3",
                           layout === "grid" && "line-clamp-3",
                           layout === "list" && "line-clamp-2",
                         )}
                       >
                         {card.description}
-                      </p>
-                    </div>
+                    </p>
                   </div>
 
-                  {layout === "stack" && isTopCard && (
-                    <div className="mt-4 pt-4 border-t dark:border-white/10 border-slate-200 flex justify-between items-center text-xs dark:text-slate-500 text-slate-400">
-                      <span>Arraste para navegar</span>
-                      <span className="font-medium text-orange-500">Clique para abrir</span>
+                  {isTopCard && layout === "stack" && (
+                    <div className="absolute -bottom-10 left-0 right-0 text-center animate-pulse">
+                      <span className="text-xs font-medium text-slate-400 dark:text-slate-500 bg-slate-200 dark:bg-white/10 px-3 py-1 rounded-full">Arraste para navegar</span>
                     </div>
-                  )}
-
-                  {layout !== 'stack' && (
-                     <div className="mt-4 flex justify-end">
-                        <span className="text-xs font-bold text-orange-500 uppercase tracking-widest bg-orange-500/10 px-3 py-1 rounded-full">Acessar</span>
-                     </div>
                   )}
                 </motion.div>
               )
@@ -217,14 +220,14 @@ export function MorphingCardStack({
       </LayoutGroup>
 
       {layout === "stack" && cards.length > 1 && (
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex justify-center gap-2 mt-8">
           {cards.map((_, index) => (
             <button
               key={index}
               onClick={() => setActiveIndex(index)}
               className={cn(
                 "h-1.5 rounded-full transition-all duration-300",
-                index === activeIndex ? "w-8 bg-orange-500" : "w-1.5 bg-slate-300 dark:bg-slate-700 hover:bg-orange-500/50",
+                index === activeIndex ? "w-6 bg-orange-500" : "w-1.5 bg-slate-300 dark:bg-slate-700 hover:bg-orange-500/50",
               )}
               aria-label={`Go to card ${index + 1}`}
             />
