@@ -3,11 +3,12 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { 
     BookOpen, Home, Activity, TrendingUp, Users, Video, Image as ImageIcon, 
     FileText, Award, QrCode, Share2, Info, ArrowRight, ExternalLink, Play,
-    Sun, Moon, Menu, X, BookMarked, Target, Search, Instagram
+    Sun, Moon, Menu, X, BookMarked, Target, Search, Instagram, Folders
 } from 'lucide-react';
 import { SectionWrapper } from './components/SectionWrapper';
 import { ChartGroup } from './components/ChartGroup';
 import { Timeline } from './components/Timeline';
+import { MorphingCardStack, CardData } from './components/ui/morphing-card-stack';
 import { CVModal, ImageModal, VideoModal } from './components/Modals';
 import { charts2024, charts2025, timelineEvents, plans, documents, galleryImages, references } from './data';
 
@@ -73,6 +74,30 @@ const App: React.FC = () => {
             item.content.toLowerCase().includes(q)
         );
     }, [searchQuery, searchIndex]);
+
+    // Prepare data for MorphingCardStack
+    const documentsCardData: CardData[] = useMemo(() => {
+        const planCards = plans.map((p, i) => ({
+            id: `plan-${i}`,
+            title: p.title,
+            description: "Documento oficial de planejamento estratégico contendo metas, cronogramas e diretrizes anuais do NUREPDH.",
+            icon: <Target className="h-6 w-6" />,
+            url: p.url,
+            color: 'orange'
+        }));
+
+        const docCards = documents.map((d, i) => ({
+            id: `doc-${i}`,
+            title: d.title,
+            description: "Material de apoio técnico, protocolos de intervenção e relatórios de atividades para suporte às escolas.",
+            icon: <FileText className="h-6 w-6" />,
+            url: d.url,
+            color: 'blue'
+        }));
+
+        // Interleave items or just concat. Let's place plans first as they are "higher level"
+        return [...planCards, ...docCards];
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -579,52 +604,28 @@ const App: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Planos e Documentos */}
-                <section className="py-8 grid md:grid-cols-2 gap-8 sm:gap-10">
-                    <div>
-                        <h2 className="flex items-center text-xl sm:text-2xl font-bold dark:text-white text-slate-900 mb-4 sm:mb-6">
-                            <FileText className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-orange-500" />
-                            Planos de Ação
+                {/* Planos e Documentos REPLACED by Morphing Card Stack */}
+                <section className="py-12 relative overflow-hidden">
+                    {/* Background decorations for the section */}
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl bg-gradient-to-r from-orange-500/5 to-blue-500/5 rounded-full blur-3xl -z-10"></div>
+                    
+                    <div className="text-center mb-10">
+                         <h2 className="flex items-center justify-center text-2xl sm:text-3xl font-bold dark:text-white text-slate-900 mb-4">
+                            <Folders className="w-8 h-8 mr-3 text-orange-500" />
+                            Central de Documentação
                         </h2>
-                        <div className="space-y-3 sm:space-y-4">
-                            {plans.map((plan, idx) => (
-                                <div 
-                                    key={idx}
-                                    onClick={() => shareLink(plan.title, plan.url)}
-                                    className="relative neon-border-animation group p-4 sm:p-5 dark:bg-slate-900 bg-slate-50 rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300"
-                                >
-                                    <div className="flex justify-between items-center relative z-10">
-                                        <span className="font-medium dark:text-slate-200 text-slate-700 group-hover:text-orange-600 dark:group-hover:text-white transition-colors text-sm sm:text-base">{plan.title}</span>
-                                        <div className="p-2 rounded-full dark:bg-white/5 bg-slate-100 group-hover:bg-orange-500 dark:group-hover:bg-orange-500 text-slate-400 group-hover:text-white transition-all">
-                                            <ExternalLink className="w-4 h-4" />
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <p className="dark:text-slate-400 text-slate-600 max-w-2xl mx-auto">
+                            Acesse os planos de ação estratégicos e documentos oficiais do NUREPDH.
+                        </p>
                     </div>
-                    <div>
-                        <h2 className="flex items-center text-xl sm:text-2xl font-bold dark:text-white text-slate-900 mb-4 sm:mb-6">
-                            <FileText className="w-5 h-5 sm:w-6 sm:h-6 mr-3 text-orange-500" />
-                            Documentos
-                        </h2>
-                        <div className="space-y-3 sm:space-y-4">
-                            {documents.map((doc, idx) => (
-                                <div 
-                                    key={idx}
-                                    onClick={() => shareLink(doc.title, doc.url)}
-                                    className="relative neon-border-animation group p-4 sm:p-5 dark:bg-slate-900 bg-slate-50 rounded-2xl cursor-pointer hover:scale-[1.02] transition-all duration-300"
-                                >
-                                    <div className="flex justify-between items-center relative z-10">
-                                        <span className="font-medium dark:text-slate-200 text-slate-700 group-hover:text-orange-600 dark:group-hover:text-white transition-colors text-sm sm:text-base">{doc.title}</span>
-                                        <div className="p-2 rounded-full dark:bg-white/5 bg-slate-100 group-hover:bg-orange-500 dark:group-hover:bg-orange-500 text-slate-400 group-hover:text-white transition-all">
-                                            <ExternalLink className="w-4 h-4" />
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+
+                    <MorphingCardStack 
+                        cards={documentsCardData} 
+                        defaultLayout="stack"
+                        onCardClick={(card) => {
+                            if (card.url) shareLink(card.title, card.url);
+                        }}
+                    />
                 </section>
 
                 <SectionWrapper id="referencias" title="Referências" icon={<BookMarked className="w-6 h-6" />}>
@@ -689,4 +690,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-        
