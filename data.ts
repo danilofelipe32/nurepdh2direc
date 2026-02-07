@@ -274,9 +274,9 @@ export const timelineEvents: TimelineEvent[] = [
 ];
 
 export const plans: DocumentItem[] = [
-    { title: 'Plano de ação 2023', url: 'https://drive.google.com/file/d/1qITEWucXz1EvlRJJTNfc7mjTnDjMcsMy/view?usp=sharing' },
-    { title: 'Plano de ação 2024', url: 'https://drive.google.com/file/d/1l_sO8lF_xxgtK8JLDKRuH5wezxH7hIkj/view?usp=sharing' },
-    { title: 'Plano de ação 2025', url: 'https://drive.google.com/file/d/1ZvrlBGa7SNdPpdTmfqyC8ROKWMih_HcC/view?usp=sharing' },
+    { title: 'Plano de ação NUREPDH 2023', url: 'https://drive.google.com/file/d/1qITEWucXz1EvlRJJTNfc7mjTnDjMcsMy/view?usp=sharing' },
+    { title: 'Plano de ação NUREPDH 2024', url: 'https://drive.google.com/file/d/1l_sO8lF_xxgtK8JLDKRuH5wezxH7hIkj/view?usp=sharing' },
+    { title: 'Plano de ação NUREPDH 2025', url: 'https://drive.google.com/file/d/1ZvrlBGa7SNdPpdTmfqyC8ROKWMih_HcC/view?usp=sharing' },
     { title: 'Plano de ação NUREPDH 2026', url: 'https://docs.google.com/document/d/1N4bMli2wAkR1IhQT4IKiXQQulz4F56CW/edit?usp=sharing&ouid=105477009348359935688&rtpof=true&sd=true' }
 ];
 
