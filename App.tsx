@@ -1,9 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
     BookOpen, Home, Activity, TrendingUp, Users, Video, Image as ImageIcon, 
     FileText, Award, QrCode, Share2, Info, ArrowRight, ExternalLink, Play,
-    Sun, Moon, Menu, X, BookMarked, Target
+    Sun, Moon, Menu, X, BookMarked, Target, Search
 } from 'lucide-react';
 import { SectionWrapper } from './components/SectionWrapper';
 import { ChartGroup } from './components/ChartGroup';
@@ -11,12 +11,24 @@ import { Timeline } from './components/Timeline';
 import { CVModal, ImageModal, VideoModal } from './components/Modals';
 import { charts2024, charts2025, timelineEvents, plans, documents, galleryImages, references } from './data';
 
+// Interface para itens de busca
+interface SearchItem {
+    id: string;
+    title: string;
+    content: string;
+    type: 'Seção' | 'Gráfico' | 'Evento' | 'Documento' | 'Vídeo';
+}
+
 const App: React.FC = () => {
     const [cvOpen, setCvOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    
+    // Search State
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     
     // Theme State initialization checking localStorage
     const [theme, setTheme] = useState(() => {
@@ -26,14 +38,62 @@ const App: React.FC = () => {
         return 'dark';
     });
 
+    // Construção do Índice de Busca
+    const searchIndex: SearchItem[] = useMemo(() => {
+        const items: SearchItem[] = [
+            // Conteúdo Estático (Manual)
+            { id: 'resumo', title: 'Resumo', type: 'Seção', content: 'Trajetória de três anos do Núcleo Regional de Educação para a Paz e Direitos Humanos. Transformação significativa nas escolas, integração comunitária, redução de conflitos.' },
+            { id: 'introducao', title: '1. Introdução', type: 'Seção', content: 'Relatório consolidado 2023-2025. NUEEPDHs, multiplicadoras, 41 escolas, práticas restaurativas, formações continuadas.' },
+            { id: 'objetivo', title: '2. Objetivo Geral', type: 'Seção', content: 'Promover cultura de não violência, fortalecer vínculos, cuidado emocional, convivência pacífica, justiça restaurativa.' },
+            { id: 'fundamentacao', title: '3. Fundamentação Teórica', type: 'Seção', content: 'Xesús R. Jares, Edgar Morin. Educar para a paz, competências para o diálogo, ética planetária, espaços escolares seguros.' },
+            { id: 'metodologia', title: '4. Metodologia', type: 'Seção', content: 'Natureza qualitativa e descritiva, análise documental, planos de ação, relatórios anuais, formulários digitais.' },
+            { id: 'clima-2024', title: '5. Avaliação do Clima Escolar 2024', type: 'Seção', content: 'Diagnóstico com 4.271 participantes. Pontos fortes e atenção necessária.' },
+            { id: 'clima-2025', title: '6. Avaliação do Clima Escolar 2025', type: 'Seção', content: 'Resultados com 1.399 respostas. Avanços significativos e consolidação.' },
+            { id: 'desenvolvimento', title: '7. Desenvolvimento e Resultados', type: 'Seção', content: 'Timeline, linha do tempo, marcos históricos do projeto.' },
+            { id: 'impactos', title: '8. Impactos e Considerações', type: 'Seção', content: 'Fortalecimento do clima escolar, redução de conflitos, referência estadual, portaria SEEC/RN.' },
+            { id: 'galeria', title: 'Galeria de Momentos', type: 'Seção', content: 'Fotos, imagens e registros visuais das ações.' },
+            { id: 'referencias', title: 'Referências Bibliográficas', type: 'Seção', content: 'Bibliografia, autores, leis e bases teóricas.' },
+        ];
+
+        // Dados Dinâmicos
+        charts2024.forEach(c => items.push({ id: 'clima-2024', title: c.title, type: 'Gráfico', content: c.summary || '' }));
+        charts2025.forEach(c => items.push({ id: 'clima-2025', title: c.title, type: 'Gráfico', content: c.summary || '' }));
+        timelineEvents.forEach(e => items.push({ id: 'desenvolvimento', title: `${e.year} - ${e.title}`, type: 'Evento', content: e.description }));
+        plans.forEach(p => items.push({ id: 'planos', title: p.title, type: 'Documento', content: 'Plano de ação estratégico.' }));
+        documents.forEach(d => items.push({ id: 'planos', title: d.title, type: 'Documento', content: 'Material de apoio e protocolos.' }));
+
+        return items;
+    }, []);
+
+    const filteredResults = useMemo(() => {
+        if (!searchQuery) return [];
+        const q = searchQuery.toLowerCase();
+        return searchIndex.filter(item => 
+            item.title.toLowerCase().includes(q) || 
+            item.content.toLowerCase().includes(q)
+        );
+    }, [searchQuery, searchIndex]);
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
-            if (mobileMenuOpen) setMobileMenuOpen(false); // Close menu on scroll
+            if (mobileMenuOpen) setMobileMenuOpen(false);
         };
-        window.addEventListener('scroll', handleScroll);
         
-        // Apply theme class to html/body
+        // Atalho de teclado para abrir busca (Ctrl+K ou Cmd+K)
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                setSearchOpen(prev => !prev);
+            }
+            if (e.key === 'Escape') {
+                setSearchOpen(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('keydown', handleKeyDown);
+        
         const root = document.documentElement;
         const body = document.body;
         if (theme === 'dark') {
@@ -45,18 +105,20 @@ const App: React.FC = () => {
         }
         localStorage.setItem('theme', theme);
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('keydown', handleKeyDown);
+        };
     }, [theme, mobileMenuOpen]);
 
     const toggleTheme = () => {
         setTheme(prev => prev === 'dark' ? 'light' : 'dark');
     };
 
-    // Função de Scroll Suave Personalizada
     const scrollToSection = (id: string) => {
         const element = document.getElementById(id);
         if (element) {
-            const offset = 80; // Altura aproximada da navbar fixa
+            const offset = 80;
             const bodyRect = document.body.getBoundingClientRect().top;
             const elementRect = element.getBoundingClientRect().top;
             const elementPosition = elementRect - bodyRect;
@@ -68,6 +130,7 @@ const App: React.FC = () => {
             });
         }
         setMobileMenuOpen(false);
+        setSearchOpen(false); // Fecha a busca ao navegar
     };
 
     const shareLink = async (title: string, url: string) => {
@@ -82,7 +145,6 @@ const App: React.FC = () => {
         }
     };
 
-    // Helper para otimizar imagens do Imgur (Thumbnail L = Large Thumbnail 640x640)
     const getOptimizedImgurUrl = (url: string) => {
         return url.replace(/(\.[^.]+)$/, 'l$1');
     };
@@ -126,6 +188,84 @@ const App: React.FC = () => {
     return (
         <div className="min-h-screen font-sans selection:bg-orange-500/30 transition-colors duration-300">
             
+            {/* Search Modal Overlay */}
+            {searchOpen && (
+                <div 
+                    className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex items-start justify-center pt-20 px-4 animate-[fade-in_0.2s_ease-out]"
+                    onClick={() => setSearchOpen(false)}
+                >
+                    <div 
+                        className="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border dark:border-white/10 border-slate-200 overflow-hidden flex flex-col max-h-[70vh] animate-[scale-in_0.2s_cubic-bezier(0.16,1,0.3,1)]"
+                        onClick={e => e.stopPropagation()}
+                    >
+                        {/* Search Input Header */}
+                        <div className="flex items-center p-4 border-b dark:border-white/10 border-slate-200 relative">
+                            <Search className="w-5 h-5 text-slate-400 absolute left-6" />
+                            <input 
+                                autoFocus
+                                type="text" 
+                                placeholder="Buscar conteúdo, gráficos ou eventos..." 
+                                className="w-full bg-transparent pl-10 pr-10 py-2 outline-none dark:text-white text-slate-800 placeholder:text-slate-400 font-medium"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <button 
+                                onClick={() => setSearchOpen(false)}
+                                className="p-1 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
+                            >
+                                <span className="text-xs font-mono border dark:border-white/20 border-slate-300 px-1.5 py-0.5 rounded mr-2">ESC</span>
+                                <X size={18} className="inline" />
+                            </button>
+                        </div>
+
+                        {/* Search Results */}
+                        <div className="overflow-y-auto p-2">
+                            {searchQuery.length > 0 ? (
+                                filteredResults.length > 0 ? (
+                                    <div className="space-y-1">
+                                        <p className="text-xs font-semibold text-slate-400 px-3 py-2 uppercase tracking-wider">
+                                            {filteredResults.length} resultados encontrados
+                                        </p>
+                                        {filteredResults.map((item, idx) => (
+                                            <button
+                                                key={`${item.id}-${idx}`}
+                                                onClick={() => scrollToSection(item.id)}
+                                                className="w-full text-left p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-colors group flex items-start gap-3"
+                                            >
+                                                <div className="mt-1 p-1.5 rounded-lg bg-slate-200 dark:bg-white/10 text-slate-500 dark:text-slate-400 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                                                    {item.type === 'Gráfico' ? <TrendingUp size={14} /> : 
+                                                     item.type === 'Evento' ? <Activity size={14} /> :
+                                                     item.type === 'Documento' ? <FileText size={14} /> :
+                                                     <BookOpen size={14} />}
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-semibold text-slate-800 dark:text-slate-200 text-sm group-hover:text-orange-500 transition-colors flex items-center gap-2">
+                                                        {item.title}
+                                                        <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-100 dark:bg-white/10 text-slate-500 font-normal">{item.type}</span>
+                                                    </h4>
+                                                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                                                        {item.content}
+                                                    </p>
+                                                </div>
+                                            </button>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="py-12 text-center text-slate-500 dark:text-slate-400">
+                                        <Search size={32} className="mx-auto mb-3 opacity-20" />
+                                        <p>Nenhum resultado encontrado para "{searchQuery}"</p>
+                                    </div>
+                                )
+                            ) : (
+                                <div className="py-12 text-center text-slate-500 dark:text-slate-400">
+                                    <p className="text-sm">Digite para pesquisar em toda a apresentação</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Navbar Glass */}
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? 'dark:bg-slate-900/90 bg-white/90 backdrop-blur-md dark:border-white/5 border-slate-200/50 border-b py-3 shadow-sm' : 'bg-transparent py-4 sm:py-6'}`}>
                 <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center relative">
@@ -152,6 +292,15 @@ const App: React.FC = () => {
                             ))}
                         </div>
 
+                        {/* Search Trigger Button */}
+                        <button
+                            onClick={() => setSearchOpen(true)}
+                            className="p-2 rounded-full dark:bg-white/10 bg-slate-200 dark:text-slate-200 text-slate-600 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-300 border dark:border-white/10 border-transparent group"
+                            aria-label="Pesquisar"
+                        >
+                            <Search size={18} className="group-hover:scale-110 transition-transform" />
+                        </button>
+
                         <button
                             onClick={toggleTheme}
                             className="p-2 rounded-full dark:bg-white/10 bg-slate-200 dark:text-slate-200 text-slate-600 hover:bg-orange-500 hover:text-white dark:hover:bg-orange-500 transition-all duration-300 border dark:border-white/10 border-transparent"
@@ -169,14 +318,23 @@ const App: React.FC = () => {
                         </button>
                     </div>
 
-                    {/* Mobile Hamburger Button */}
-                    <button 
-                        className="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors z-20"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label="Abrir menu"
-                    >
-                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+                    {/* Mobile Controls */}
+                    <div className="md:hidden flex items-center gap-3 z-20">
+                         <button
+                            onClick={() => setSearchOpen(true)}
+                            className="p-2 rounded-lg text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
+                        >
+                            <Search size={22} />
+                        </button>
+
+                        <button 
+                            className="p-2 rounded-lg text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label="Abrir menu"
+                        >
+                            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        </button>
+                    </div>
 
                     {/* Mobile Menu Overlay */}
                     {mobileMenuOpen && (
