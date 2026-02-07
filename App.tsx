@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import { 
     BookOpen, Home, Activity, TrendingUp, Users, Video, Image as ImageIcon, 
     FileText, Award, QrCode, Share2, Info, ArrowRight, ExternalLink, Play,
@@ -551,8 +552,12 @@ const App: React.FC = () => {
                     {/* Alteração: grid-cols-2 no mobile (padrao) e grid-cols-3 no desktop */}
                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                         {galleryImages.slice(0, 12).map((src, idx) => (
-                            <div 
+                            <motion.div 
                                 key={idx} 
+                                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.5, delay: idx * 0.1, ease: "easeOut" }}
                                 className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer dark:border-white/10 border-slate-200 border bg-slate-200 dark:bg-slate-800 shadow-lg"
                                 onClick={() => setSelectedImage(src)}
                             >
@@ -565,7 +570,7 @@ const App: React.FC = () => {
                                     decoding="async"
                                     fetchPriority="low"
                                 />
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </section>
