@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { 
     BookOpen, Home, Activity, TrendingUp, Users, Video, Image as ImageIcon, 
     FileText, Award, QrCode, Share2, Info, ArrowRight, ExternalLink, Play,
-    Sun, Moon, Menu, X, BookMarked, Target, Search
+    Sun, Moon, Menu, X, BookMarked, Target, Search, Instagram
 } from 'lucide-react';
 import { SectionWrapper } from './components/SectionWrapper';
 import { ChartGroup } from './components/ChartGroup';
@@ -651,6 +651,20 @@ const App: React.FC = () => {
                     </div>
                     <p className="mt-6 dark:text-slate-400 text-slate-600 text-base sm:text-lg">Escaneie para acessar o material completo e dados detalhados.</p>
                 </section>
+
+                {/* Instagram Minimalista */}
+                <div className="flex justify-center items-center pb-8">
+                    <a 
+                        href="https://instagram.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:border-pink-500/50 hover:bg-pink-500/5 transition-all duration-300 shadow-sm"
+                    >
+                        <Instagram className="w-5 h-5 text-slate-500 dark:text-slate-400 group-hover:text-pink-500 transition-colors" />
+                        <span className="text-sm font-medium text-slate-600 dark:text-slate-300 group-hover:text-pink-500 transition-colors">Siga-nos no Instagram</span>
+                    </a>
+                </div>
+
             </main>
 
             {/* Footer */}
@@ -675,3 +689,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+        
