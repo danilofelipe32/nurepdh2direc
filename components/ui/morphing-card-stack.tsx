@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, type ReactNode } from "react"
@@ -27,6 +28,12 @@ const layoutIcons = {
   stack: Layers,
   grid: Grid3X3,
   list: LayoutList,
+}
+
+const layoutDescriptions: Record<LayoutMode, string> = {
+  stack: "Modo Pilha: Interativo (Arraste)",
+  grid: "Modo Grade: Visão Geral",
+  list: "Modo Lista: Compacto",
 }
 
 const SWIPE_THRESHOLD = 50
@@ -118,7 +125,7 @@ export function MorphingCardStack({
                   key={mode}
                   onClick={() => setLayout(mode)}
                   className={cn(
-                    "rounded-md p-2 transition-all",
+                    "group relative rounded-md p-2 transition-all",
                     layout === mode
                       ? "bg-orange-500 text-white shadow-md"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/20",
@@ -126,6 +133,13 @@ export function MorphingCardStack({
                   aria-label={`Switch to ${mode} layout`}
                 >
                   <Icon className="h-4 w-4" />
+                  
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-[10px] font-medium text-white bg-slate-900 dark:bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50">
+                      {layoutDescriptions[mode]}
+                      {/* Arrow */}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-4 border-transparent border-t-slate-900 dark:border-t-slate-800"></div>
+                  </div>
                 </button>
               )
             })}
