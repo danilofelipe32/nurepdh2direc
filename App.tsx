@@ -620,7 +620,7 @@ const App: React.FC = () => {
                     id="referencias" 
                     title="Referências" 
                     icon={<BookMarked className="w-6 h-6" />}
-                    className="mt-[40vh]"
+                    className="mt-[65vh]"
                 >
                     <ul className="space-y-4">
                         {references.map((ref, idx) => (
