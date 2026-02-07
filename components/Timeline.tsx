@@ -12,8 +12,8 @@ const FlashCard: React.FC<{ event: TimelineEvent }> = ({ event }) => {
         >
             <div 
                 className={`
-                    w-full h-full relative transition-transform duration-700 transform-style-3d
-                    ${isFlipped ? 'rotate-y-180' : ''}
+                    w-full h-full relative transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] transform-style-3d
+                    ${isFlipped ? '[transform:rotateY(180deg)]' : ''}
                 `}
             >
                 {/* Front */}
