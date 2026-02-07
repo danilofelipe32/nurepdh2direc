@@ -286,9 +286,9 @@ export const documents: DocumentItem[] = [
     { title: 'Protocolo de Mediação de Conflitos', url: 'https://drive.google.com/file/d/1lOhunV8iSgmwHOVixOjvCZ3yG4I8Yr21/view?usp=drive_link' },
     { title: 'Relatório Retrospectiva', url: 'https://drive.google.com/file/d/1PgGA6umiy4I5OZJkCn7IVb2g09Mne1fx/view?usp=drive_link' },
     // URLs de teste funcionais para demonstração
-    { title: 'PROMAPE', url: 'https://www.google.com/search?q=PROMAPE+RN' }, 
-    { title: 'Implantação de rede família-escola', url: 'https://www.google.com/search?q=rede+familia+escola+RN' },
-    { title: 'Protocolo de Acolhimento Emocional Escolar', url: 'https://www.google.com/search?q=protocolo+acolhimento+emocional+escolar' }
+    { title: 'PROMAPE', url: 'https://drive.google.com/file/d/18YYhTRciMiflPY70AinqW7YvXSCUOjLl/view?usp=sharing' }, 
+    { title: 'Implantação de rede família-escola', url: 'https://docs.google.com/document/d/1P69TUh8Kl40mbsY76uwf2If5_S-iHwgK/edit?usp=sharing&ouid=105477009348359935688&rtpof=true&sd=true' },
+    { title: 'Protocolo de Acolhimento Emocional Escolar', url: 'https://docs.google.com/document/d/1XKcD7AM1cvnGdolli7I5Y2rpq6OBIvV2/edit?usp=sharing&ouid=105477009348359935688&rtpof=true&sd=true' }
 ];
 
 export const galleryImages = [
