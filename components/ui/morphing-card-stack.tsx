@@ -136,13 +136,13 @@ export function MorphingCardStack({
   return (
     <div className={cn("space-y-6 w-full max-w-4xl mx-auto p-4", className)}>
       {/* Header with Title, Filter and Layout Toggle */}
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <h3 className="text-2xl font-bold dark:text-white text-slate-800 pl-1">
               Biblioteca Digital
           </h3>
           
-          <div className="flex flex-row items-center justify-between gap-3">
-              <div className="flex-1 overflow-x-auto scrollbar-hide">
+          <div className="flex flex-row items-center justify-end gap-3 w-full md:w-auto">
+              <div className="flex-1 md:flex-none overflow-x-auto scrollbar-hide">
                 {categories.length > 1 && (
                     <div className="flex gap-2 min-w-max p-1">
                         {categories.map(cat => (
@@ -150,7 +150,8 @@ export function MorphingCardStack({
                                 key={cat}
                                 onClick={() => setFilter(cat)}
                                 className={cn(
-                                    "px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all border",
+                                    "px-3 py-1.5 sm:px-4 sm:py-2 rounded-full font-medium transition-all border",
+                                    "text-[10px] sm:text-xs", // Reduzido em aprox 10%
                                     filter === cat
                                         ? "bg-orange-500 border-orange-500 text-white shadow-md shadow-orange-500/20"
                                         : "bg-transparent border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:border-orange-500/50 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-slate-50 dark:hover:bg-white/5"
