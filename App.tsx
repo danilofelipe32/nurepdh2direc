@@ -85,7 +85,8 @@ const App: React.FC = () => {
             description: "Plano de ação estratégico para implementação das metodologias do NUREPDH nas escolas.",
             url: p.url,
             icon: <Target className="w-6 h-6" />,
-            color: "#f97316" // Orange
+            color: "#f97316", // Orange
+            category: "Plano"
         }));
 
         const docCards = documents.map((d, i) => ({
@@ -94,7 +95,8 @@ const App: React.FC = () => {
             description: "Documentação oficial, protocolos e relatórios de acompanhamento das atividades.",
             url: d.url,
             icon: <FileText className="w-6 h-6" />,
-            color: "#3b82f6" // Blue
+            color: "#3b82f6", // Blue
+            category: "Documento"
         }));
 
         return [...planCards, ...docCards];
