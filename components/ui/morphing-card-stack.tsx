@@ -103,7 +103,7 @@ export function MorphingCardStack({
   }
 
   const containerStyles = {
-    stack: "relative h-80 w-72 sm:w-80 mx-auto mt-8 mb-32",
+    stack: "relative h-80 w-72 sm:w-80 mx-auto mt-8 mb-64",
     grid: "grid grid-cols-1 sm:grid-cols-2 gap-4",
     list: "flex flex-col gap-3",
   }
