@@ -141,16 +141,16 @@ export function MorphingCardStack({
               Biblioteca Digital
           </h3>
           
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex-1 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+          <div className="flex flex-row items-center justify-between gap-3">
+              <div className="flex-1 overflow-x-auto scrollbar-hide">
                 {categories.length > 1 && (
-                    <div className="flex gap-2 min-w-max">
+                    <div className="flex gap-2 min-w-max p-1">
                         {categories.map(cat => (
                             <button
                                 key={cat}
                                 onClick={() => setFilter(cat)}
                                 className={cn(
-                                    "px-4 py-2 rounded-full text-sm font-medium transition-all border",
+                                    "px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all border",
                                     filter === cat
                                         ? "bg-orange-500 border-orange-500 text-white shadow-md shadow-orange-500/20"
                                         : "bg-transparent border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:border-orange-500/50 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-slate-50 dark:hover:bg-white/5"
