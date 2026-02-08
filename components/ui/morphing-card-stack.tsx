@@ -135,58 +135,60 @@ export function MorphingCardStack({
 
   return (
     <div className={cn("space-y-6 w-full max-w-4xl mx-auto p-4", className)}>
-      {/* Header with Filter and Layout Toggle */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-          <div className="space-y-3">
-            <h3 className="text-xl font-bold dark:text-white text-slate-800">
-                Biblioteca Digital
-            </h3>
-            {categories.length > 1 && (
-                <div className="flex flex-wrap gap-2">
-                    {categories.map(cat => (
-                        <button
-                            key={cat}
-                            onClick={() => setFilter(cat)}
-                            className={cn(
-                                "px-3 py-1 rounded-full text-xs font-medium transition-all border",
-                                filter === cat
-                                    ? "bg-orange-500 border-orange-500 text-white shadow-md"
-                                    : "bg-transparent border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:border-orange-500/50 hover:text-orange-500 dark:hover:text-orange-400"
-                            )}
-                        >
-                            {cat}
-                        </button>
-                    ))}
-                </div>
-            )}
-          </div>
+      {/* Header with Title, Filter and Layout Toggle */}
+      <div className="flex flex-col gap-5">
+          <h3 className="text-2xl font-bold dark:text-white text-slate-800 pl-1">
+              Biblioteca Digital
+          </h3>
+          
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex-1 overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+                {categories.length > 1 && (
+                    <div className="flex gap-2 min-w-max">
+                        {categories.map(cat => (
+                            <button
+                                key={cat}
+                                onClick={() => setFilter(cat)}
+                                className={cn(
+                                    "px-4 py-2 rounded-full text-sm font-medium transition-all border",
+                                    filter === cat
+                                        ? "bg-orange-500 border-orange-500 text-white shadow-md shadow-orange-500/20"
+                                        : "bg-transparent border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 hover:border-orange-500/50 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-slate-50 dark:hover:bg-white/5"
+                                )}
+                            >
+                                {cat}
+                            </button>
+                        ))}
+                    </div>
+                )}
+              </div>
 
-          <div className="flex items-center justify-center gap-1 rounded-lg bg-slate-200 dark:bg-white/10 p-1 w-fit self-start sm:self-auto">
-            {(Object.keys(layoutIcons) as LayoutMode[]).map((mode) => {
-              const Icon = layoutIcons[mode]
-              return (
-                <button
-                  key={mode}
-                  onClick={() => setLayout(mode)}
-                  className={cn(
-                    "group relative rounded-md p-2 transition-all",
-                    layout === mode
-                      ? "bg-white dark:bg-slate-700 text-orange-500 shadow-sm"
-                      : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/20",
-                  )}
-                  aria-label={`Switch to ${mode} layout`}
-                >
-                  <Icon className="h-4 w-4" />
-                  
-                  {/* Tooltip */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-[10px] font-medium text-white bg-slate-900 dark:bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50">
-                      {layoutDescriptions[mode]}
-                      {/* Arrow */}
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-4 border-transparent border-t-slate-900 dark:border-t-slate-800"></div>
-                  </div>
-                </button>
-              )
-            })}
+              <div className="flex items-center gap-1 rounded-lg bg-slate-100 dark:bg-slate-800/50 p-1 w-fit border border-slate-200 dark:border-white/5 shrink-0">
+                {(Object.keys(layoutIcons) as LayoutMode[]).map((mode) => {
+                  const Icon = layoutIcons[mode]
+                  return (
+                    <button
+                      key={mode}
+                      onClick={() => setLayout(mode)}
+                      className={cn(
+                        "group relative rounded-md p-2 transition-all",
+                        layout === mode
+                          ? "bg-white dark:bg-slate-700 text-orange-500 shadow-sm"
+                          : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200/50 dark:hover:bg-white/5",
+                      )}
+                      aria-label={`Switch to ${mode} layout`}
+                    >
+                      <Icon className="h-4 w-4" />
+                      
+                      {/* Tooltip */}
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-[10px] font-medium text-white bg-slate-900 dark:bg-slate-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-lg z-50">
+                          {layoutDescriptions[mode]}
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-4 border-transparent border-t-slate-900 dark:border-t-slate-800"></div>
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
           </div>
       </div>
 
@@ -204,7 +206,6 @@ export function MorphingCardStack({
                 const hasUrl = card.url && card.url !== '#'
                 const isInteractive = layout !== "stack" || isTopCard
                 
-                // Use 'a' tag for valid links to ensure native browser behavior (middle click, open in new tab)
                 const Component = (hasUrl && isInteractive) ? motion.a : motion.div
 
                 return (
