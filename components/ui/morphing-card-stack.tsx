@@ -254,13 +254,24 @@ export function MorphingCardStack({
                     }}
                     
                     className={cn(
-                        "rounded-2xl border p-5 backdrop-blur-xl shadow-xl flex flex-col h-full",
+                        "rounded-2xl border p-5 backdrop-blur-xl shadow-xl flex flex-col h-full transition-all duration-300",
                         "dark:bg-slate-900/90 bg-white/90 dark:border-white/10 border-slate-200",
-                        "hover:border-orange-500/50 transition-colors",
+                        
+                        // Default Hover for all
+                        "hover:border-orange-500/50",
+                        
                         layout === "stack" && "absolute w-full h-full",
-                        layout === "stack" && isTopCard && "cursor-grab active:cursor-grabbing shadow-[0_0_30px_rgba(0,0,0,0.2)]",
-                        layout === "grid" && "w-full aspect-[4/3]",
-                        layout === "list" && "w-full",
+                        
+                        // ACTIVE CARD STYLING (Stack Mode Top Card)
+                        layout === "stack" && isTopCard && "cursor-grab active:cursor-grabbing border-orange-500 dark:border-orange-500 ring-4 ring-orange-500/10 shadow-[0_0_40px_rgba(249,115,22,0.2)] z-50",
+                        
+                        // Inactive Stack Cards styling
+                        layout === "stack" && !isTopCard && "opacity-80 saturate-50 hover:saturate-100 hover:opacity-100",
+
+                        // Grid/List Active/Hover Styling
+                        layout === "grid" && "w-full aspect-[4/3] hover:shadow-[0_0_25px_rgba(249,115,22,0.15)] hover:border-orange-500/50 hover:-translate-y-1",
+                        layout === "list" && "w-full hover:shadow-[0_0_20px_rgba(249,115,22,0.1)] hover:border-orange-500/50",
+
                         isExpanded && "ring-2 ring-orange-500",
                         (hasUrl && isInteractive) ? "cursor-pointer" : "cursor-default"
                     )}
