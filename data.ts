@@ -288,7 +288,8 @@ export const documents: DocumentItem[] = [
     // URLs de teste funcionais para demonstração
     { title: 'PROMAPE', url: 'https://drive.google.com/file/d/18YYhTRciMiflPY70AinqW7YvXSCUOjLl/view?usp=sharing' }, 
     { title: 'Implantação de rede família-escola', url: 'https://docs.google.com/document/d/1P69TUh8Kl40mbsY76uwf2If5_S-iHwgK/edit?usp=sharing&ouid=105477009348359935688&rtpof=true&sd=true' },
-    { title: 'Protocolo de Acolhimento Emocional Escolar', url: 'https://docs.google.com/document/d/1XKcD7AM1cvnGdolli7I5Y2rpq6OBIvV2/edit?usp=sharing&ouid=105477009348359935688&rtpof=true&sd=true' }
+    { title: 'Protocolo de Acolhimento Emocional Escolar', url: 'https://docs.google.com/document/d/1XKcD7AM1cvnGdolli7I5Y2rpq6OBIvV2/edit?usp=sharing&ouid=105477009348359935688&rtpof=true&sd=true' },
+    { title: 'Projeto professor como agente de acolhimento e encaminhamento', url: 'https://docs.google.com/document/d/1zA5VDdkUXXOFof1eTppFi3DaVmR5LN5TgYzHVKSGGHU/edit?usp=sharing' }
 ];
 
 export const galleryImages = [
